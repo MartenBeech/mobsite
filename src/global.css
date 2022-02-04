@@ -1,48 +1,84 @@
 .text-position-left {
-    text-align: left;
+  text-align: left;
 }
 
 .text-position-right {
-    text-align: right;
+  text-align: right;
 }
 
 .text-position-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-color-black {
-    color: black;
+  color: black;
 }
 
 .text-color-blue {
-    color: blue;
+  color: blue;
 }
 
 .text-color-red {
-    color: red;
+  color: red;
 }
 
 .text-size-small {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .text-size-medium {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .text-size-big {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .width-small {
-    width: 10%;
+  width: 10%;
 }
 
-.background-color-gray {
-    background-color: gray;
+.background-color-gray-light {
+  background-color: rgb(226, 226, 226);
+}
+
+.background-color-gray-dark {
+  background-color: rgb(161, 161, 161);
 }
 
 .table-row {
-    justify-content: center;
-    width: 50%;
+  justify-content: center;
+  width: 200px;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+.input {
+  justify-content: center;
+  width: 194px;
+  height: 2vh;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button {
+  justify-content: center;
+  width: 5%;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }

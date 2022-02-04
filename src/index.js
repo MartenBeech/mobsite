@@ -5,12 +5,12 @@ import {Home} from './pages/home.tsx';
 import {Incrementer} from './pages/incrementer.tsx';
 import {Sidebar} from './components/sidebar.tsx';
 import {CurrentTime} from './pages/currentTime.tsx';
-import {TableData} from './pages/tableData.tsx';
+import {IngredientTable} from './pages/ingredientTable.tsx';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TableData />
+    <IngredientTable />
   </React.StrictMode>,
   document.getElementById('root')
 );
