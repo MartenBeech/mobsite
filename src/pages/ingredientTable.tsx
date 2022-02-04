@@ -1,5 +1,6 @@
 import react, { useState, useEffect } from "react";
 import "../global.css";
+// @ts-ignore
 import { Table } from "../components/table/table.tsx";
 
 export interface rowData {
@@ -23,7 +24,8 @@ export const IngredientTable = () => {
   }, []);
 
   const handleInputName = (e: React.FormEvent<HTMLInputElement>) => {
-    const newString = e.target.value;
+    const target = e.target as HTMLInputElement;
+    const newString = target.value;
 
     setState({
       ...state,
@@ -32,7 +34,8 @@ export const IngredientTable = () => {
   };
 
   const handleInputAmount = (e: React.FormEvent<HTMLInputElement>) => {
-    const newString = e.target.value;
+    const target = e.target as HTMLInputElement;
+    const newString = target.value;
 
     setState({
       ...state,
@@ -41,19 +44,23 @@ export const IngredientTable = () => {
   };
 
   const handleClickAdd = (e: React.FormEvent<HTMLButtonElement>) => {
-    const addedData: rowData = {
-      name: state.inputName,
-      amount: parseInt(state.inputAmount, 10),
-    };
+    if (state.inputName && state.inputAmount) {
+      const addedData: rowData = {
+        name: state.inputName,
+        amount: parseInt(state.inputAmount, 10),
+      };
 
-    const newData = [...state.data, addedData];
+      const newData = [...state.data, addedData];
 
-    setState({
-      ...state,
-      inputName: "",
-      inputAmount: "",
-      data: newData,
-    });
+      setState({
+        ...state,
+        inputName: "",
+        inputAmount: "",
+        data: newData,
+      });
+    } else {
+      alert("Please fill out both Name and Amount");
+    }
   };
 
   return (
@@ -61,10 +68,12 @@ export const IngredientTable = () => {
       <div className="flex-row">
         <input
           className="input"
+          type={"text"}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
             handleInputName(e);
           }}
           value={state.inputName}
+          placeholder="Name"
         />
         <input
           className="input"
@@ -73,6 +82,7 @@ export const IngredientTable = () => {
             handleInputAmount(e);
           }}
           value={state.inputAmount}
+          placeholder="Amount"
         />
         <button
           className="button"
