@@ -5,12 +5,13 @@ import {Home} from './pages/home.tsx';
 import {Incrementer} from './pages/incrementer.tsx';
 import {Sidebar} from './components/sidebar.tsx';
 import {CurrentTime} from './pages/currentTime.tsx';
+import {StarGame} from './pages/starGame.tsx';
 import {IngredientTable} from './pages/ingredientTable.tsx';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <IngredientTable />
+    <StarGame />
   </React.StrictMode>,
   document.getElementById('root')
 );

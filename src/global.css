@@ -46,6 +46,18 @@
   background-color: rgb(161, 161, 161);
 }
 
+.background-color-green {
+  background-color: green;
+}
+
+.background-color-yellow {
+  background-color: yellow;
+}
+
+.background-color-red {
+  background-color: red;
+}
+
 .table-row {
   justify-content: center;
   width: 200px;
@@ -81,4 +93,41 @@
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  width: 300px;
+  height: 300px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.box-small {
+  width: 75px;
+  height: 75px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid black;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.centered-div {
+  margin-top: 100px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
