@@ -37,5 +37,9 @@ export const TableData = () => {
     });
   }, []);
 
-  return <div className="background-color-gray"></div>;
+  return (
+    <>
+      <div className="background-color-gray"></div>
+    </>
+  );
 };

@@ -1,0 +1,48 @@
+.text-position-left {
+    text-align: left;
+}
+
+.text-position-right {
+    text-align: right;
+}
+
+.text-position-center {
+    text-align: center;
+}
+
+.text-color-black {
+    color: black;
+}
+
+.text-color-blue {
+    color: blue;
+}
+
+.text-color-red {
+    color: red;
+}
+
+.text-size-small {
+    font-size: 12px;
+}
+
+.text-size-medium {
+    font-size: 18px;
+}
+
+.text-size-big {
+    font-size: 24px;
+}
+
+.width-small {
+    width: 10%;
+}
+
+.background-color-gray {
+    background-color: gray;
+}
+
+.table-row {
+    justify-content: center;
+    width: 50%;
+}
