@@ -4,7 +4,7 @@ import { VscStarFull } from "react-icons/vsc";
 
 export const StarGame = () => {
   const [state, setState] = useState({
-    numbersUnused: [0],
+    numbersAvailable: [0],
     numbersInUse: [0],
     numbersCompleted: [0],
     stars: 0,
@@ -13,30 +13,36 @@ export const StarGame = () => {
   const [timeState, setTimeState] = useState(0);
 
   useEffect(() => {
-    const numbersUnused = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const stars = getNewStars(numbersUnused);
+    const numbersAvailable = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const stars = getNewStars(numbersAvailable);
     setState({
-      numbersUnused: numbersUnused,
+      numbersAvailable: numbersAvailable,
       numbersInUse: [],
       numbersCompleted: [],
       stars: stars,
       sum: 0,
     });
+    setTimeState(1000);
   }, []);
 
+  useEffect(() => {
+    const timerId = setTimeout(UpdateTime, 10);
+    return () => clearTimeout(timerId);
+  });
+
   const handleNumberClick = (value: number) => {
-    let numbersUnused = [...state.numbersUnused];
+    let numbersAvailable = [...state.numbersAvailable];
     let numbersInUse = [...state.numbersInUse];
     let numbersCompleted = [...state.numbersCompleted];
     let sum = state.sum;
     let stars = state.stars;
     if (getNumberUnused(value)) {
-      numbersUnused = numbersUnused.filter((number) => number !== value);
+      numbersAvailable = numbersAvailable.filter((number) => number !== value);
       numbersInUse.push(value);
       sum += value;
     } else if (getNumberInUse(value)) {
       numbersInUse = numbersInUse.filter((number) => number !== value);
-      numbersUnused.push(value);
+      numbersAvailable.push(value);
       sum -= value;
     }
     if (sum === state.stars) {
@@ -45,12 +51,12 @@ export const StarGame = () => {
       });
       numbersInUse = [];
       sum = 0;
-      stars = getNewStars(numbersUnused);
+      stars = getNewStars(numbersAvailable);
     }
 
     setState({
       ...state,
-      numbersUnused: numbersUnused,
+      numbersAvailable: numbersAvailable,
       numbersInUse: numbersInUse,
       numbersCompleted: numbersCompleted,
       sum: sum,
@@ -60,7 +66,7 @@ export const StarGame = () => {
 
   const getNumberUnused = (value: number) => {
     let returnValue = false;
-    state.numbersUnused.map((number) => {
+    state.numbersAvailable.map((number) => {
       if (number === value) {
         returnValue = true;
       }
@@ -139,19 +145,17 @@ export const StarGame = () => {
     }
   };
 
-  const getNewStars = (numbersUnused: number[]) => {
-    if (numbersUnused.length > 0) {
-      const possibleAmount = [...numbersUnused];
-
-      for (let i = 0; i < numbersUnused.length - 1; i++) {
-        for (let j = i + 1; j < numbersUnused.length; j++) {
-          const sum = numbersUnused[i] + numbersUnused[j];
+  const getNewStars = (numbersAvailable: number[]) => {
+    if (numbersAvailable.length > 0) {
+      const possibleAmount = [...numbersAvailable];
+      for (let i = 0; i < numbersAvailable.length - 1; i++) {
+        for (let j = i + 1; j < numbersAvailable.length; j++) {
+          const sum = numbersAvailable[i] + numbersAvailable[j];
           if (sum < 10 && !possibleAmount.includes(sum)) {
             possibleAmount.push(sum);
           }
         }
       }
-
       const rnd = Math.floor(Math.random() * possibleAmount.length);
       return possibleAmount[rnd];
     }
@@ -159,10 +163,10 @@ export const StarGame = () => {
   };
 
   const UpdateTime = () => {
-    setTimeState(timeState - 1);
+    if (timeState > 0 && state.stars > 0) {
+      setTimeState(timeState - 1);
+    }
   };
-
-  // setInterval(UpdateTime, 1000);
 
   return (
     <div className="centered-div">
@@ -170,7 +174,9 @@ export const StarGame = () => {
         Pick 1 or more numbers that sum to the number of stars
       </div>
       <div className="flex-row">
-        {state.stars > 0 ? (
+        {timeState === 0 ? (
+          <div className="box">Time out!</div>
+        ) : state.stars > 0 ? (
           <div className="box">
             <div>
               <div>{renderStars(1)}</div>
@@ -189,7 +195,7 @@ export const StarGame = () => {
             </div>
           </div>
         ) : (
-          <div className="box">You Won</div>
+          <div className="box">You Won!</div>
         )}
         <div className="box">
           <div>
@@ -209,7 +215,9 @@ export const StarGame = () => {
           </div>
         </div>
       </div>
-      <div className="text-size-medium">Time Remaining: {timeState}</div>
+      <div className="text-size-medium">
+        Time Remaining: {(timeState / 100).toFixed(2)}
+      </div>
     </div>
   );
 };
