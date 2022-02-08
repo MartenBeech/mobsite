@@ -335,7 +335,7 @@ export const GameOfLife = () => {
               handleTheRPentomino();
             }}
           >
-            The R-pentomino
+            R-pentomino
           </button>
         </div>
         <div>
