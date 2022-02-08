@@ -146,3 +146,32 @@
   display: flex;
   flex-direction: column;
 }
+
+.cell-alive {
+  width: 10px;
+  height: 10px;
+  border: 1px solid gray;
+  background-color: black;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.cell-dead {
+  width: 10px;
+  height: 10px;
+  border: 1px solid gray;
+  background-color: lightgray;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.cell-button {
+  width: 75px;
+  height: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
