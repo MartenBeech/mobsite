@@ -1,5 +1,3 @@
-import react, { useState, useEffect } from "react";
-import "../../global.css";
 // @ts-ignore
 import { DIMENTIONS } from "../../pages/gameOfLife.tsx";
 

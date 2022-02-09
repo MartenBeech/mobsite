@@ -1,4 +1,3 @@
-import react, { useState, useEffect } from "react";
 import "../../global.css";
 
 interface props {
@@ -6,10 +5,6 @@ interface props {
 }
 
 export const Cell = (props: props) => {
-  const [state, setState] = useState({
-    alive: props.alive,
-  });
-
   return (
     <div>
       {props.alive ? (

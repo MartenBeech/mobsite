@@ -11,6 +11,8 @@ import {
 } from "../components/gameOfLife/pattern.tsx";
 // @ts-ignore
 import { Cell } from "../components/gameOfLife/cell.tsx";
+// @ts-ignore
+import { SetNewCellConditions } from "../components/gameOfLife/cellCondition.tsx";
 
 export const DIMENTIONS = 50;
 
@@ -43,83 +45,12 @@ export const GameOfLife = () => {
   }, []);
 
   useEffect(() => {
-    const timerId = setTimeout(setNewCellConditions, 200);
+    const timerId = setTimeout(
+      () => SetNewCellConditions({ state, setState }),
+      200
+    );
     return () => clearTimeout(timerId);
   });
-
-  const copyOf2dArray = (data: Array<any>[]) => {
-    let alive: boolean[][] = [];
-    state.columns.map((column: number) => {
-      alive.push([]);
-      state.rows.map((row: number) => {
-        alive[column][row] = data[column][row];
-      });
-    });
-    return alive;
-  };
-
-  const setNewCellConditions = () => {
-    let alive: boolean[][] = copyOf2dArray(state.alive);
-
-    for (let i = 0; i < state.columns.length; i++) {
-      for (let j = 0; j < state.rows.length; j++) {
-        let neighbours = 0;
-        if (isCellAlive(i - 1, j - 1)) {
-          neighbours++;
-        }
-        if (isCellAlive(i - 1, j)) {
-          neighbours++;
-        }
-        if (isCellAlive(i - 1, j + 1)) {
-          neighbours++;
-        }
-        if (isCellAlive(i, j - 1)) {
-          neighbours++;
-        }
-        if (isCellAlive(i, j + 1)) {
-          neighbours++;
-        }
-        if (isCellAlive(i + 1, j - 1)) {
-          neighbours++;
-        }
-        if (isCellAlive(i + 1, j)) {
-          neighbours++;
-        }
-        if (isCellAlive(i + 1, j + 1)) {
-          neighbours++;
-        }
-
-        if (state.alive[i][j]) {
-          if (neighbours < 2 || neighbours > 3) {
-            alive[i][j] = false;
-          }
-        } else if (!state.alive[i][j]) {
-          if (neighbours === 3) {
-            alive[i][j] = true;
-          }
-        }
-      }
-    }
-    setState({
-      ...state,
-      alive: alive,
-    });
-  };
-
-  const isCellAlive = (column: number, row: number) => {
-    if (
-      row < 0 ||
-      column < 0 ||
-      column >= state.columns.length ||
-      row >= state.rows.length
-    ) {
-      return false;
-    }
-    if (state.alive[column][row]) {
-      return true;
-    }
-    return false;
-  };
 
   return (
     <div className="flex-row">
