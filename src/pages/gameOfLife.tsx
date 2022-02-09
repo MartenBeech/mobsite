@@ -1,7 +1,18 @@
 import react, { useState, useEffect } from "react";
 import "../global.css";
+import {
+  handleBlinker,
+  handleAcorn,
+  handleDieHard,
+  handlePulsar,
+  handleTheRPentomino,
+  handleRandom,
+  // @ts-ignore
+} from "../components/gameOfLife/pattern.tsx";
+// @ts-ignore
+import { Cell } from "../components/gameOfLife/cell.tsx";
 
-const DIMENTIONS = 50;
+export const DIMENTIONS = 50;
 
 export const GameOfLife = () => {
   const [state, setState] = useState({
@@ -110,198 +121,19 @@ export const GameOfLife = () => {
     return false;
   };
 
-  const renderCell = (alive: boolean) => {
-    return (
-      <div>
-        {alive ? (
-          <div className="cell-alive"></div>
-        ) : (
-          <div className="cell-dead"></div>
-        )}
-      </div>
-    );
-  };
-
-  const handleBlinker = () => {
-    let alive: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      alive.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        alive[i][j] = false;
-      }
-    }
-
-    const c = DIMENTIONS / 2 - 1;
-
-    alive[c - 5][c - 4] = true;
-    alive[c - 5][c - 5] = true;
-    alive[c - 5][c - 6] = true;
-
-    alive[c - 5][c + 4] = true;
-    alive[c - 5][c + 5] = true;
-    alive[c - 5][c + 6] = true;
-
-    alive[c + 5][c - 4] = true;
-    alive[c + 5][c - 5] = true;
-    alive[c + 5][c - 6] = true;
-
-    alive[c + 5][c + 4] = true;
-    alive[c + 5][c + 5] = true;
-    alive[c + 5][c + 6] = true;
-
-    setState({ ...state, alive: alive });
-  };
-
-  const handlePulsar = () => {
-    let alive: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      alive.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        alive[i][j] = false;
-      }
-    }
-
-    const c = DIMENTIONS / 2 - 1;
-
-    alive[c - 1][c - 2] = true;
-    alive[c - 1][c - 3] = true;
-    alive[c - 1][c - 4] = true;
-    alive[c - 2][c - 1] = true;
-    alive[c - 3][c - 1] = true;
-    alive[c - 4][c - 1] = true;
-    alive[c - 6][c - 2] = true;
-    alive[c - 6][c - 3] = true;
-    alive[c - 6][c - 4] = true;
-    alive[c - 2][c - 6] = true;
-    alive[c - 3][c - 6] = true;
-    alive[c - 4][c - 6] = true;
-
-    alive[c - 1][c + 2] = true;
-    alive[c - 1][c + 3] = true;
-    alive[c - 1][c + 4] = true;
-    alive[c - 2][c + 1] = true;
-    alive[c - 3][c + 1] = true;
-    alive[c - 4][c + 1] = true;
-    alive[c - 6][c + 2] = true;
-    alive[c - 6][c + 3] = true;
-    alive[c - 6][c + 4] = true;
-    alive[c - 2][c + 6] = true;
-    alive[c - 3][c + 6] = true;
-    alive[c - 4][c + 6] = true;
-
-    alive[c + 1][c - 2] = true;
-    alive[c + 1][c - 3] = true;
-    alive[c + 1][c - 4] = true;
-    alive[c + 2][c - 1] = true;
-    alive[c + 3][c - 1] = true;
-    alive[c + 4][c - 1] = true;
-    alive[c + 6][c - 2] = true;
-    alive[c + 6][c - 3] = true;
-    alive[c + 6][c - 4] = true;
-    alive[c + 2][c - 6] = true;
-    alive[c + 3][c - 6] = true;
-    alive[c + 4][c - 6] = true;
-
-    alive[c + 1][c + 2] = true;
-    alive[c + 1][c + 3] = true;
-    alive[c + 1][c + 4] = true;
-    alive[c + 2][c + 1] = true;
-    alive[c + 3][c + 1] = true;
-    alive[c + 4][c + 1] = true;
-    alive[c + 6][c + 2] = true;
-    alive[c + 6][c + 3] = true;
-    alive[c + 6][c + 4] = true;
-    alive[c + 2][c + 6] = true;
-    alive[c + 3][c + 6] = true;
-    alive[c + 4][c + 6] = true;
-
-    setState({ ...state, alive: alive });
-  };
-
-  const handleTheRPentomino = () => {
-    let alive: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      alive.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        alive[i][j] = false;
-      }
-    }
-
-    const c = DIMENTIONS / 2 - 1;
-
-    alive[c][c] = true;
-    alive[c - 1][c] = true;
-    alive[c + 1][c] = true;
-    alive[c][c - 1] = true;
-    alive[c - 1][c + 1] = true;
-
-    setState({ ...state, alive: alive });
-  };
-
-  const handleDieHard = () => {
-    let alive: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      alive.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        alive[i][j] = false;
-      }
-    }
-
-    const c = DIMENTIONS / 2 - 1;
-
-    alive[c][c - 2] = true;
-    alive[c][c - 3] = true;
-    alive[c + 1][c - 2] = true;
-    alive[c + 1][c + 2] = true;
-    alive[c + 1][c + 3] = true;
-    alive[c + 1][c + 4] = true;
-    alive[c - 1][c + 3] = true;
-
-    setState({ ...state, alive: alive });
-  };
-
-  const handleAcorn = () => {
-    let alive: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      alive.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        alive[i][j] = false;
-      }
-    }
-
-    const c = DIMENTIONS / 2 - 1;
-
-    alive[c][c] = true;
-    alive[c - 1][c - 2] = true;
-    alive[c + 1][c + 1] = true;
-    alive[c + 1][c + 2] = true;
-    alive[c + 1][c + 3] = true;
-    alive[c + 1][c - 2] = true;
-    alive[c + 1][c - 3] = true;
-
-    setState({ ...state, alive: alive });
-  };
-
-  const handleRandom = () => {
-    let alive: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      alive.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        alive[i][j] = Math.random() < 0.5 ? true : false;
-      }
-    }
-
-    setState({ ...state, alive: alive });
-  };
-
   return (
     <div className="flex-row">
       <div>
         {state.columns.map((column: number) => {
           return (
-            <div className="flex-row">
+            <div key={column} className="flex-row">
               {state.rows.map((row: number) => {
-                return renderCell(state.alive[column][row]);
+                return (
+                  <Cell
+                    key={`${column}-${row}`}
+                    alive={state.alive[column][row]}
+                  />
+                );
               })}
             </div>
           );
@@ -312,7 +144,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleBlinker();
+              handleBlinker({ state, setState });
             }}
           >
             Blinker
@@ -322,7 +154,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handlePulsar();
+              handlePulsar({ state, setState });
             }}
           >
             Pulsar
@@ -332,7 +164,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleTheRPentomino();
+              handleTheRPentomino({ state, setState });
             }}
           >
             R-pentomino
@@ -342,7 +174,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleDieHard();
+              handleDieHard({ state, setState });
             }}
           >
             Die Hard
@@ -352,7 +184,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleAcorn();
+              handleAcorn({ state, setState });
             }}
           >
             Acorn
@@ -362,7 +194,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleRandom();
+              handleRandom({ state, setState });
             }}
           >
             Random
