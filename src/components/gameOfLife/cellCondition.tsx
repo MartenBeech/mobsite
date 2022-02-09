@@ -1,6 +1,6 @@
 interface props {
-  state;
-  setState;
+  state: any;
+  setState: any;
 }
 
 const copyOf2dArray = (data: Array<any>[], props: props) => {

@@ -1,6 +1,6 @@
+// @ts-nocheck
 import react, { useState, useEffect } from "react";
 import "../global.css";
-// @ts-ignore
 import { Table } from "../components/table/table.tsx";
 
 export interface rowData {

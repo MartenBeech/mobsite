@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-nocheck
 import { DIMENTIONS } from "../../pages/gameOfLife.tsx";
 
 interface props {
@@ -6,7 +6,7 @@ interface props {
   setState: any;
 }
 
-export const handleBlinker = (props: props) => {
+export const HandleBlinker = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -36,7 +36,7 @@ export const handleBlinker = (props: props) => {
   props.setState({ ...props.state, alive: alive });
 };
 
-export const handlePulsar = (props: props) => {
+export const HandlePulsar = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -102,7 +102,7 @@ export const handlePulsar = (props: props) => {
   props.setState({ ...props.state, alive: alive });
 };
 
-export const handleTheRPentomino = (props: props) => {
+export const HandleTheRPentomino = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -122,7 +122,7 @@ export const handleTheRPentomino = (props: props) => {
   props.setState({ ...props.state, alive: alive });
 };
 
-export const handleDieHard = (props: props) => {
+export const HandleDieHard = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -144,7 +144,7 @@ export const handleDieHard = (props: props) => {
   props.setState({ ...props.state, alive: alive });
 };
 
-export const handleAcorn = (props: props) => {
+export const HandleAcorn = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -166,7 +166,7 @@ export const handleAcorn = (props: props) => {
   props.setState({ ...props.state, alive: alive });
 };
 
-export const handleRandom = (props: props) => {
+export const HandleRandom = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);

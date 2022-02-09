@@ -1,7 +1,6 @@
+// @ts-nocheck
 import react, { useState, useEffect } from "react";
-// @ts-ignore
 import { TableRowProps } from "./tableRow.tsx";
-// @ts-ignore
 import { TableRow } from "./tableRow.tsx";
 
 export interface tableProps {

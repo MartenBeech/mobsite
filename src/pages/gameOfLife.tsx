@@ -1,17 +1,15 @@
+// @ts-nocheck
 import react, { useState, useEffect } from "react";
 import "../global.css";
 import {
-  handleBlinker,
-  handleAcorn,
-  handleDieHard,
-  handlePulsar,
-  handleTheRPentomino,
-  handleRandom,
-  // @ts-ignore
+  HandleBlinker,
+  HandleAcorn,
+  HandleDieHard,
+  HandlePulsar,
+  HandleTheRPentomino,
+  HandleRandom,
 } from "../components/gameOfLife/pattern.tsx";
-// @ts-ignore
 import { Cell } from "../components/gameOfLife/cell.tsx";
-// @ts-ignore
 import { SetNewCellConditions } from "../components/gameOfLife/cellCondition.tsx";
 
 export const DIMENTIONS = 50;
@@ -75,7 +73,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleBlinker({ state, setState });
+              HandleBlinker({ state, setState });
             }}
           >
             Blinker
@@ -85,7 +83,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handlePulsar({ state, setState });
+              HandlePulsar({ state, setState });
             }}
           >
             Pulsar
@@ -95,7 +93,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleTheRPentomino({ state, setState });
+              HandleTheRPentomino({ state, setState });
             }}
           >
             R-pentomino
@@ -105,7 +103,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleDieHard({ state, setState });
+              HandleDieHard({ state, setState });
             }}
           >
             Die Hard
@@ -115,7 +113,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleAcorn({ state, setState });
+              HandleAcorn({ state, setState });
             }}
           >
             Acorn
@@ -125,7 +123,7 @@ export const GameOfLife = () => {
           <button
             className="cell-button"
             onClick={() => {
-              handleRandom({ state, setState });
+              HandleRandom({ state, setState });
             }}
           >
             Random
