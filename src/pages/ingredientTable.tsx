@@ -1,5 +1,5 @@
 // @ts-nocheck
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../global.css";
 import { Table } from "../components/table/table.tsx";
 

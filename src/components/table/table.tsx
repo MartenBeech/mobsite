@@ -1,5 +1,5 @@
 // @ts-nocheck
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { TableRowProps } from "./tableRow.tsx";
 import { TableRow } from "./tableRow.tsx";
 

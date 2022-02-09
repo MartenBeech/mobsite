@@ -3,32 +3,6 @@ interface props {
   setState: any;
 }
 
-const copyOf2dArray = (data: Array<any>[], props: props) => {
-  let alive: boolean[][] = [];
-  props.state.columns.map((column: number) => {
-    alive.push([]);
-    props.state.rows.map((row: number) => {
-      alive[column][row] = data[column][row];
-    });
-  });
-  return alive;
-};
-
-const isCellAlive = (column: number, row: number, props: props) => {
-  if (
-    row < 0 ||
-    column < 0 ||
-    column >= props.state.columns.length ||
-    row >= props.state.rows.length
-  ) {
-    return false;
-  }
-  if (props.state.alive[column][row]) {
-    return true;
-  }
-  return false;
-};
-
 export const SetNewCellConditions = (props: props) => {
   let alive: boolean[][] = copyOf2dArray(props.state.alive, props);
 
@@ -75,4 +49,30 @@ export const SetNewCellConditions = (props: props) => {
     ...props.state,
     alive: alive,
   });
+};
+
+const copyOf2dArray = (data: Array<any>[], props: props) => {
+  let alive: boolean[][] = [];
+  props.state.columns.map((column: number) => {
+    alive.push([]);
+    props.state.rows.map((row: number) => {
+      alive[column][row] = data[column][row];
+    });
+  });
+  return alive;
+};
+
+const isCellAlive = (column: number, row: number, props: props) => {
+  if (
+    row < 0 ||
+    column < 0 ||
+    column >= props.state.columns.length ||
+    row >= props.state.rows.length
+  ) {
+    return false;
+  }
+  if (props.state.alive[column][row]) {
+    return true;
+  }
+  return false;
 };
