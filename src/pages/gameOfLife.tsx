@@ -6,6 +6,7 @@ import {
   HandleAcorn,
   HandleDieHard,
   HandlePulsar,
+  HandleGlider,
   HandleTheRPentomino,
   HandleRandom,
 } from "../components/gameOfLife/pattern.tsx";
@@ -71,7 +72,7 @@ export const GameOfLife = () => {
       <div>
         <div>
           <button
-            className="cell-button"
+            className="cell-button border border-slate-300"
             onClick={() => {
               HandleBlinker({ state, setState });
             }}
@@ -81,7 +82,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button"
+            className="cell-button border border-slate-300"
             onClick={() => {
               HandlePulsar({ state, setState });
             }}
@@ -91,7 +92,17 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button"
+            className="cell-button border border-slate-300"
+            onClick={() => {
+              HandleGlider({ state, setState });
+            }}
+          >
+            Glider
+          </button>
+        </div>
+        <div>
+          <button
+            className="cell-button border border-slate-300"
             onClick={() => {
               HandleTheRPentomino({ state, setState });
             }}
@@ -101,7 +112,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button"
+            className="cell-button border border-slate-300"
             onClick={() => {
               HandleDieHard({ state, setState });
             }}
@@ -111,7 +122,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button"
+            className="cell-button border border-slate-300"
             onClick={() => {
               HandleAcorn({ state, setState });
             }}
@@ -121,7 +132,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button"
+            className="cell-button border border-slate-300"
             onClick={() => {
               HandleRandom({ state, setState });
             }}

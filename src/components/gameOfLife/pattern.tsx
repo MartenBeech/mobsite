@@ -102,6 +102,24 @@ export const HandlePulsar = (props: props) => {
   props.setState({ ...props.state, alive: alive });
 };
 
+export const HandleGlider = (props: props) => {
+  let alive: boolean[][] = [];
+  for (let i = 0; i < DIMENTIONS; i++) {
+    alive.push([false]);
+    for (let j = 0; j < DIMENTIONS; j++) {
+      alive[i][j] = false;
+    }
+  }
+
+  alive[1][2] = true;
+  alive[2][3] = true;
+  alive[3][1] = true;
+  alive[3][2] = true;
+  alive[3][3] = true;
+
+  props.setState({ ...props.state, alive: alive });
+};
+
 export const HandleTheRPentomino = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {

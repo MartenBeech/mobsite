@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "../global.css";
 
 export const RandomUser = () => {
   const [state, setState] = useState({
@@ -22,7 +21,7 @@ export const RandomUser = () => {
         user: {
           picture: results.picture.medium,
           name: `${results.name.title} ${results.name.first} ${results.name.last}`,
-          user: `User: ${results.login.username} Pass: ${results.login.password}`,
+          user: `${results.login.username} - ${results.login.password}`,
           location: `${results.location.street.name} ${results.location.street.number} - ${results.location.country}`,
           email: results.email,
           phone: `${results.cell}`,
@@ -33,13 +32,27 @@ export const RandomUser = () => {
   }, []);
 
   return (
-    <div className="user-table-row">
-      <img className="user-table-element" src={state.user.picture} />
-      <div className="user-table-element">{state.user.name}</div>
-      <div className="user-table-element">| {state.user.email}</div>
-      <div className="user-table-element">| {state.user.user}</div>
-      <div className="user-table-element">| {state.user.location}</div>
-      <div className="user-table-element">| {state.user.phone}</div>
-    </div>
+    <>
+      <tr>
+        <td className="border border-slate-300 flex justify-center">
+          <img src={state.user.picture} />
+        </td>
+        <td className="border border-slate-300">
+          <div className="flex justify-center">{state.user.name}</div>
+        </td>
+        <td className="border border-slate-300">
+          <div className="flex justify-center">{state.user.email}</div>
+        </td>
+        <td className="border border-slate-300">
+          <div className="flex justify-center">{state.user.user}</div>
+        </td>
+        <td className="border border-slate-300">
+          <div className="flex justify-center">{state.user.location}</div>
+        </td>
+        <td className="border border-slate-300">
+          <div className="flex justify-center">{state.user.phone}</div>
+        </td>
+      </tr>
+    </>
   );
 };
