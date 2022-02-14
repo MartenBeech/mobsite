@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
-import "../global.css";
 import {
   HandleBlinker,
   HandleAcorn,
@@ -20,6 +19,7 @@ export const GameOfLife = () => {
     columns: [0],
     rows: [0],
     alive: [[false]],
+    speed: 3,
   });
   useEffect(() => {
     const columns: Array<number> = [];
@@ -40,16 +40,28 @@ export const GameOfLife = () => {
       }
     }
 
-    setState({ columns: columns, rows: rows, alive: alive });
+    setState({ ...state, columns: columns, rows: rows, alive: alive });
   }, []);
 
   useEffect(() => {
     const timerId = setTimeout(
       () => SetNewCellConditions({ state, setState }),
-      200
+      750 / state.speed
     );
     return () => clearTimeout(timerId);
   });
+
+  const updateSpeed = (faster: boolean) => {
+    let newSpeed = state.speed;
+    faster ? newSpeed++ : newSpeed--;
+    if (newSpeed < 1) {
+      newSpeed = 1;
+    }
+    if (newSpeed > 10) {
+      newSpeed = 10;
+    }
+    setState({ ...state, speed: newSpeed });
+  };
 
   return (
     <div className="flex-row">
@@ -69,10 +81,31 @@ export const GameOfLife = () => {
           );
         })}
       </div>
-      <div>
+      <div className="w-96">
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/12"
+            onClick={() => {
+              updateSpeed(false);
+            }}
+          >
+            -
+          </button>
+          <button className="border border-slate-300 bg-gray-100 w-1/6">
+            {state.speed}
+          </button>
+          <button
+            className="border border-slate-300 bg-gray-100 w-1/12"
+            onClick={() => {
+              updateSpeed(true);
+            }}
+          >
+            +
+          </button>
+        </div>
+        <div>
+          <button
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandleBlinker({ state, setState });
             }}
@@ -82,7 +115,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandlePulsar({ state, setState });
             }}
@@ -92,7 +125,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandleGlider({ state, setState });
             }}
@@ -102,7 +135,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandleTheRPentomino({ state, setState });
             }}
@@ -112,7 +145,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandleDieHard({ state, setState });
             }}
@@ -122,7 +155,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandleAcorn({ state, setState });
             }}
@@ -132,7 +165,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="cell-button border border-slate-300"
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
               HandleRandom({ state, setState });
             }}

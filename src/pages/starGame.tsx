@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "../global.css";
 import { VscStarFull } from "react-icons/vsc";
 
 export const StarGame = () => {
@@ -169,11 +168,11 @@ export const StarGame = () => {
   };
 
   return (
-    <div className="centered-div">
+    <div className="centered-div w-screen">
       <div className="text-size-medium">
         Pick 1 or more numbers that sum to the number of stars
       </div>
-      <div className="flex-row">
+      <div className="flex flex-row">
         {timeState === 0 ? (
           <div className="box">Time out!</div>
         ) : state.stars > 0 ? (

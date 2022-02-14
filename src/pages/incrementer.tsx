@@ -10,6 +10,7 @@ export const Incrementer = (): JSX.Element => {
     return (
       <>
         <button
+          className="border mr-2 bg-gray-100 w-16"
           onClick={() => {
             setCounter(counter + props.increment);
           }}
@@ -25,7 +26,7 @@ export const Incrementer = (): JSX.Element => {
   }
 
   const Display = (props: displayProps) => {
-    return <div>{props.value}</div>;
+    return <div className="text-3xl mt-5 ml-10">{props.value}</div>;
   };
 
   return (

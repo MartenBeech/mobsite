@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
-import "../global.css";
 import { Table } from "../components/table/table.tsx";
 
 export interface rowData {
@@ -64,10 +63,10 @@ export const IngredientTable = () => {
   };
 
   return (
-    <>
-      <div className="flex-row">
+    <div className="flex-column">
+      <div className="">
         <input
-          className="input"
+          className="ml-6 w-36 border"
           type={"text"}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
             handleInputName(e);
@@ -76,7 +75,7 @@ export const IngredientTable = () => {
           placeholder="Name"
         />
         <input
-          className="input"
+          className="ml-6 w-36 border"
           type={"number"}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
             handleInputAmount(e);
@@ -85,7 +84,7 @@ export const IngredientTable = () => {
           placeholder="Amount"
         />
         <button
-          className="button"
+          className="border bg-gray-100 w-20 h-10 mt-5 ml-6"
           onClick={(e: React.FormEvent<HTMLButtonElement>) => {
             handleClickAdd(e);
           }}
@@ -93,9 +92,9 @@ export const IngredientTable = () => {
           Add
         </button>
       </div>
-      <div className="display-inline-block">
+      <div className="mt-5">
         <Table data={state.data} />
       </div>
-    </>
+    </div>
   );
 };

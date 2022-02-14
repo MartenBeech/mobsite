@@ -19,5 +19,7 @@ export const CurrentTime = (): JSX.Element => {
   };
 
   setInterval(UpdateTime, 1000);
-  return <div>{`${state.date} ${state.time}`}</div>;
+  return (
+    <div className="mt-5 ml-5 text-3xl">{`${state.date} ${state.time}`}</div>
+  );
 };
