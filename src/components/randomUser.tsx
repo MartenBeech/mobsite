@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 
-export const RandomUser = () => {
+type props = {
+  index: number;
+};
+
+export const RandomUser = (props: props) => {
   const [state, setState] = useState({
     user: {
       picture: "",
@@ -20,7 +24,7 @@ export const RandomUser = () => {
       setState({
         user: {
           picture: results.picture.medium,
-          name: `${results.name.title} ${results.name.first} ${results.name.last}`,
+          name: `"${results.name.title}" ${results.name.first} ${results.name.last}`,
           user: `${results.login.username} - ${results.login.password}`,
           location: `${results.location.street.name} ${results.location.street.number} - ${results.location.country}`,
           email: results.email,
@@ -31,25 +35,32 @@ export const RandomUser = () => {
     getUser();
   }, []);
 
+  const tableBg =
+    props.index % 2 === 0
+      ? "bg-gray-100 border border-slate-400"
+      : "bg-gray-200 border border-slate-400";
+
   return (
     <>
       <tr>
-        <td className="border border-slate-300 flex justify-center">
-          <img src={state.user.picture} />
+        <td className={tableBg}>
+          <div className="flex justify-center">
+            <img width={100} src={state.user.picture} />
+          </div>
         </td>
-        <td className="border border-slate-300">
+        <td className={tableBg}>
           <div className="flex justify-center">{state.user.name}</div>
         </td>
-        <td className="border border-slate-300">
+        <td className={tableBg}>
           <div className="flex justify-center">{state.user.email}</div>
         </td>
-        <td className="border border-slate-300">
+        <td className={tableBg}>
           <div className="flex justify-center">{state.user.user}</div>
         </td>
-        <td className="border border-slate-300">
+        <td className={tableBg}>
           <div className="flex justify-center">{state.user.location}</div>
         </td>
-        <td className="border border-slate-300">
+        <td className={tableBg}>
           <div className="flex justify-center">{state.user.phone}</div>
         </td>
       </tr>

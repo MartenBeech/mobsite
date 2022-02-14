@@ -4,25 +4,37 @@ import { RandomUser } from "../components/randomUser.tsx";
 
 export const RandomUsers = () => {
   const [state, setState] = useState({
-    users: [0, 1, 2, 3, 4, 5],
+    users: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   });
 
   return (
     <div className="flex justify-center mt-8">
-      <table className="border-collapse border w-5/6">
+      <table className="border-collapse border w-5/6 h-screen">
         <thead>
           <tr>
-            <th className="border border-slate-300 w-1/6">Image</th>
-            <th className="border border-slate-300 w-1/6">Name</th>
-            <th className="border border-slate-300 w-1/6">Email</th>
-            <th className="border border-slate-300 w-1/6">Login</th>
-            <th className="border border-slate-300 w-1/6">Location</th>
-            <th className="border border-slate-300 w-1/6">Phone</th>
+            <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">
+              Image
+            </th>
+            <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">
+              Name
+            </th>
+            <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">
+              Email
+            </th>
+            <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">
+              Login
+            </th>
+            <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">
+              Location
+            </th>
+            <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">
+              Phone
+            </th>
           </tr>
         </thead>
         <tbody>
-          {state.users.map((user) => {
-            return <RandomUser key={user} />;
+          {state.users.map((user, index) => {
+            return <RandomUser index={index} key={user} />;
           })}
         </tbody>
       </table>
