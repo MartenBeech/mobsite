@@ -8,9 +8,9 @@ export const RandomUsers = () => {
   });
 
   return (
-    <div className="h-max-screen w-screen bg-gray-100 h-max-20">
+    <div className="h-max-screen w-screen">
       <div className="flex justify-center mt-8">
-        <table className="border-collapse border w-5/6 overflow-auto">
+        <table className="border-collapse border w-5/6">
           <thead>
             <tr>
               <th className="border border-slate-400 bg-sky-600 w-1/6 h-20 text-xl">

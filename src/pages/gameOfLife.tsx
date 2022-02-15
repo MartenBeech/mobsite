@@ -19,7 +19,7 @@ export const GameOfLife = () => {
     columns: [0],
     rows: [0],
     alive: [[false]],
-    speed: 3,
+    speed: 2,
   });
   useEffect(() => {
     const columns: Array<number> = [];
@@ -46,7 +46,7 @@ export const GameOfLife = () => {
   useEffect(() => {
     const timerId = setTimeout(
       () => SetNewCellConditions({ state, setState }),
-      750 / state.speed
+      1024 / Math.pow(2, state.speed)
     );
     return () => clearTimeout(timerId);
   });
@@ -91,8 +91,8 @@ export const GameOfLife = () => {
           >
             -
           </button>
-          <button className="border border-slate-300 bg-gray-100 w-1/6">
-            {state.speed}
+          <button className="border border-slate-300 bg-gray-100 w-1/6 cursor-default">
+            Spd: {state.speed}
           </button>
           <button
             className="border border-slate-300 bg-gray-100 w-1/12"
