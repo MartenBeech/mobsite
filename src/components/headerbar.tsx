@@ -8,15 +8,15 @@ export const Headerbar = () => {
       <div className="bg-blue-500 w-full h-20 shadow-md">
         <div className="flex-row h-full items-center">
           <div className="flex w-1/6 justify-center">
-            <FaUserAlt size={30} />
+            <FaUserAlt size={30} className="cursor-pointer" />
             <div className="ml-2 text-xl">Mr. Userman</div>
           </div>
           <div className="flex w-2/3 justify-center">
-            <MdNotificationsNone size={30} />
+            <MdNotificationsNone size={30} className="cursor-pointer" />
             <div className="ml-2 text-xl">Notifications</div>
           </div>
           <div className="flex w-1/6 justify-center">
-            <FiPower size={30} />
+            <FiPower size={30} className="cursor-pointer" />
             <div className="ml-2 text-xl">Log out</div>
           </div>
         </div>

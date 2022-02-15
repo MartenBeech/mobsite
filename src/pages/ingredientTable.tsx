@@ -20,6 +20,7 @@ export const IngredientTable = () => {
       ...state,
       data: tableData,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputName = (e: React.FormEvent<HTMLInputElement>) => {

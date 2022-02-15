@@ -46,7 +46,7 @@ export const StarGame = () => {
     }
     if (sum === state.stars) {
       numbersInUse.map((number) => {
-        numbersCompleted.push(number);
+        return numbersCompleted.push(number);
       });
       numbersInUse = [];
       sum = 0;
@@ -69,6 +69,7 @@ export const StarGame = () => {
       if (number === value) {
         returnValue = true;
       }
+      return null;
     });
     return returnValue;
   };
@@ -79,6 +80,7 @@ export const StarGame = () => {
       if (number === value) {
         returnValue = true;
       }
+      return null;
     });
     return returnValue;
   };
@@ -89,6 +91,7 @@ export const StarGame = () => {
       if (number === value) {
         returnValue = true;
       }
+      return null;
     });
     return returnValue;
   };

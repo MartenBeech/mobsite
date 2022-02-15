@@ -55,8 +55,8 @@ const copyOf2dArray = (data: Array<any>[], props: props) => {
   let alive: boolean[][] = [];
   props.state.columns.map((column: number) => {
     alive.push([]);
-    props.state.rows.map((row: number) => {
-      alive[column][row] = data[column][row];
+    return props.state.rows.map((row: number) => {
+      return (alive[column][row] = data[column][row]);
     });
   });
   return alive;

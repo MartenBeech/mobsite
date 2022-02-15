@@ -45,7 +45,11 @@ export const RandomUser = (props: props) => {
       <tr>
         <td className={tableBg}>
           <div className="flex justify-center">
-            <img width={100} src={state.user.picture} />
+            <img
+              width={100}
+              src={state.user.picture}
+              alt={state.user.picture}
+            />
           </div>
         </td>
         <td className={tableBg}>

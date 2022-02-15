@@ -41,6 +41,7 @@ export const GameOfLife = () => {
     }
 
     setState({ ...state, columns: columns, rows: rows, alive: alive });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -57,15 +58,15 @@ export const GameOfLife = () => {
     if (newSpeed < 1) {
       newSpeed = 1;
     }
-    if (newSpeed > 10) {
-      newSpeed = 10;
+    if (newSpeed > 9) {
+      newSpeed = 9;
     }
     setState({ ...state, speed: newSpeed });
   };
 
   return (
     <div className="flex-row mt-4">
-      <div>
+      <div className="mr-4">
         {state.columns.map((column: number) => {
           return (
             <div key={column} className="flex-row">
