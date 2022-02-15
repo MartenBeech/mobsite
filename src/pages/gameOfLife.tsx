@@ -64,7 +64,7 @@ export const GameOfLife = () => {
   };
 
   return (
-    <div className="flex-row">
+    <div className="flex-row mt-4">
       <div>
         {state.columns.map((column: number) => {
           return (

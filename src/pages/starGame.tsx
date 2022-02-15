@@ -168,7 +168,7 @@ export const StarGame = () => {
   };
 
   return (
-    <div className="centered-div w-screen mb-40">
+    <div className="centered-div w-screen mb-56">
       <div className="text-size-medium">
         Pick 1 or more numbers that sum to the number of stars
       </div>

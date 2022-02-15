@@ -30,7 +30,7 @@ export const Incrementer = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <Button {...{ increment: 1 }} />
       <Button {...{ increment: 5 }} />
       <Button {...{ increment: 10 }} />

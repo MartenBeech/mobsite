@@ -81,7 +81,7 @@ const Button = ({ state, setState, text, link }) => {
 
   return (
     <Link to={`${link}`}>
-      <div className="flex flex-column ml-2 mr-2 mt-2">
+      <div className="flex flex-column ml-2 mr-2 mt-4">
         <button
           className={
             link === state.currentLink
