@@ -17,21 +17,21 @@ export const HandleBlinker = (props: props) => {
 
   const c = DIMENTIONS / 2 - 1;
 
-  alive[c - 5][c - 4] = true;
-  alive[c - 5][c - 5] = true;
-  alive[c - 5][c - 6] = true;
+  alive[c][c - 4] = true;
+  alive[c][c - 5] = true;
+  alive[c][c - 6] = true;
 
-  alive[c - 5][c + 4] = true;
-  alive[c - 5][c + 5] = true;
-  alive[c - 5][c + 6] = true;
+  alive[c][c + 4] = true;
+  alive[c][c + 5] = true;
+  alive[c][c + 6] = true;
 
-  alive[c + 5][c - 4] = true;
-  alive[c + 5][c - 5] = true;
-  alive[c + 5][c - 6] = true;
+  alive[c - 4][c] = true;
+  alive[c - 5][c] = true;
+  alive[c - 6][c] = true;
 
-  alive[c + 5][c + 4] = true;
-  alive[c + 5][c + 5] = true;
-  alive[c + 5][c + 6] = true;
+  alive[c + 4][c] = true;
+  alive[c + 5][c] = true;
+  alive[c + 6][c] = true;
 
   props.setState({ ...props.state, alive: alive });
 };

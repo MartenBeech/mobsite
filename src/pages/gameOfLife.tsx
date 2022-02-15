@@ -19,7 +19,7 @@ export const GameOfLife = () => {
     columns: [0],
     rows: [0],
     alive: [[false]],
-    speed: 2,
+    speed: 3,
   });
   useEffect(() => {
     const columns: Array<number> = [];
@@ -46,7 +46,7 @@ export const GameOfLife = () => {
   useEffect(() => {
     const timerId = setTimeout(
       () => SetNewCellConditions({ state, setState }),
-      1024 / Math.pow(2, state.speed)
+      2048 / Math.pow(2, state.speed)
     );
     return () => clearTimeout(timerId);
   });
