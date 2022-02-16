@@ -1,16 +1,25 @@
-import "../../global.css";
-
 interface props {
   alive: boolean;
+  handleClick;
 }
 
 export const Cell = (props: props) => {
   return (
     <div>
       {props.alive ? (
-        <div className="cell-alive"></div>
+        <div
+          className="w-5 h-5 border cursor-pointer hover:bg-gray-400 bg-black"
+          onClick={() => {
+            props.handleClick();
+          }}
+        ></div>
       ) : (
-        <div className="cell-dead"></div>
+        <div
+          className="w-5 h-5 border cursor-pointer hover:bg-gray-300 bg-gray-100"
+          onClick={() => {
+            props.handleClick();
+          }}
+        ></div>
       )}
     </div>
   );

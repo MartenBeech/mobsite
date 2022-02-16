@@ -6,6 +6,18 @@ interface props {
   setState: any;
 }
 
+export const HandleClear = (props: props) => {
+  let alive: boolean[][] = [];
+  for (let i = 0; i < DIMENTIONS; i++) {
+    alive.push([false]);
+    for (let j = 0; j < DIMENTIONS; j++) {
+      alive[i][j] = false;
+    }
+  }
+
+  props.setState({ ...props.state, alive: alive });
+};
+
 export const HandleBlinker = (props: props) => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {

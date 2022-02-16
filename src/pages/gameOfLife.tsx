@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
 import {
+  HandleClear,
   HandleBlinker,
   HandleAcorn,
   HandleDieHard,
@@ -20,6 +21,7 @@ export const GameOfLife = () => {
     rows: [0],
     alive: [[false]],
     speed: 3,
+    started: false,
   });
   useEffect(() => {
     const columns: Array<number> = [];
@@ -45,11 +47,13 @@ export const GameOfLife = () => {
   }, []);
 
   useEffect(() => {
-    const timerId = setTimeout(
-      () => SetNewCellConditions({ state, setState }),
-      2048 / Math.pow(2, state.speed)
-    );
-    return () => clearTimeout(timerId);
+    if (state.started) {
+      const timerId = setTimeout(
+        () => SetNewCellConditions({ state, setState }),
+        2048 / Math.pow(2, state.speed)
+      );
+      return () => clearTimeout(timerId);
+    }
   });
 
   const updateSpeed = (faster: boolean) => {
@@ -75,6 +79,10 @@ export const GameOfLife = () => {
                   <Cell
                     key={`${column}-${row}`}
                     alive={state.alive[column][row]}
+                    handleClick={() => {
+                      state.alive[column][row] = !state.alive[column][row];
+                      setState({ ...state });
+                    }}
                   />
                 );
               })}
@@ -85,7 +93,27 @@ export const GameOfLife = () => {
       <div className="w-96">
         <div>
           <button
-            className="border border-slate-300 bg-gray-100 w-1/12"
+            className="border border-slate-300 bg-gray-100 w-1/3"
+            onClick={() => {
+              setState({ ...state, started: !state.started });
+            }}
+          >
+            {state.started ? "Pause" : "Start"}
+          </button>
+        </div>
+        <div>
+          <button
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
+            onClick={() => {
+              HandleClear({ state, setState });
+            }}
+          >
+            Clear
+          </button>
+        </div>
+        <div>
+          <button
+            className="border border-slate-300 bg-gray-100 w-1/12 mt-4 mb-4"
             onClick={() => {
               updateSpeed(false);
             }}
