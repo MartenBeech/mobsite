@@ -4,7 +4,7 @@ interface props {
 }
 
 export const SetNewCellConditions = (props: props) => {
-  let alive: boolean[][] = copyOf2dArray(props.state.alive, props);
+  let alive: boolean[][] = copyOf2dArray({ state: props.state });
 
   for (let i = 0; i < props.state.columns.length; i++) {
     for (let j = 0; j < props.state.rows.length; j++) {
@@ -52,12 +52,12 @@ export const SetNewCellConditions = (props: props) => {
   });
 };
 
-const copyOf2dArray = (data: Array<any>[], props: props) => {
+export const copyOf2dArray = ({ state }) => {
   let alive: boolean[][] = [];
-  props.state.columns.map((column: number) => {
+  state.columns.map((column: number) => {
     alive.push([]);
-    return props.state.rows.map((row: number) => {
-      return (alive[column][row] = data[column][row]);
+    return state.rows.map((row: number) => {
+      return (alive[column][row] = state.alive[column][row]);
     });
   });
   return alive;

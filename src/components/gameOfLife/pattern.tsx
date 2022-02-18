@@ -1,12 +1,7 @@
 // @ts-nocheck
 import { DIMENTIONS } from "../../pages/gameOfLife.tsx";
 
-interface props {
-  state: any;
-  setState: any;
-}
-
-export const HandleClear = (props: props) => {
+export const GetClear = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -15,15 +10,10 @@ export const HandleClear = (props: props) => {
     }
   }
 
-  props.setState({
-    ...props.state,
-    alive: alive,
-    evolutions: 0,
-    started: false,
-  });
+  return alive;
 };
 
-export const HandleBlinker = (props: props) => {
+export const GetBlinker = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -50,10 +40,10 @@ export const HandleBlinker = (props: props) => {
   alive[c + 5][c] = true;
   alive[c + 6][c] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandlePulsar = (props: props) => {
+export const GetPulsar = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -116,10 +106,10 @@ export const HandlePulsar = (props: props) => {
   alive[c + 3][c + 6] = true;
   alive[c + 4][c + 6] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandleGlider = (props: props) => {
+export const GetGlider = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -134,10 +124,10 @@ export const HandleGlider = (props: props) => {
   alive[3][2] = true;
   alive[3][3] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandleTheRPentomino = (props: props) => {
+export const GetTheRPentomino = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -154,10 +144,10 @@ export const HandleTheRPentomino = (props: props) => {
   alive[c][c - 1] = true;
   alive[c - 1][c + 1] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandleDieHard = (props: props) => {
+export const GetDieHard = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -176,10 +166,10 @@ export const HandleDieHard = (props: props) => {
   alive[c + 1][c + 4] = true;
   alive[c - 1][c + 3] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandleAcorn = (props: props) => {
+export const GetAcorn = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -198,10 +188,10 @@ export const HandleAcorn = (props: props) => {
   alive[c + 1][c - 2] = true;
   alive[c + 1][c - 3] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandleSpaceship = (props: props) => {
+export const GetSpaceship = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -340,10 +330,10 @@ export const HandleSpaceship = (props: props) => {
   alive[c - 6][c - 18] = true;
   alive[c - 7][c - 18] = true;
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };
 
-export const HandleRandom = (props: props) => {
+export const GetRandom = () => {
   let alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
@@ -352,5 +342,5 @@ export const HandleRandom = (props: props) => {
     }
   }
 
-  props.setState({ ...props.state, alive: alive });
+  return alive;
 };

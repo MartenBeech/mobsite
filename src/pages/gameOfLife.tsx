@@ -1,18 +1,21 @@
 // @ts-nocheck
 import { useState, useEffect } from "react";
 import {
-  HandleClear,
-  HandleBlinker,
-  HandleAcorn,
-  HandleDieHard,
-  HandlePulsar,
-  HandleGlider,
-  HandleTheRPentomino,
-  HandleSpaceship,
-  HandleRandom,
+  GetClear,
+  GetBlinker,
+  GetAcorn,
+  GetDieHard,
+  GetPulsar,
+  GetGlider,
+  GetTheRPentomino,
+  GetSpaceship,
+  GetRandom,
 } from "../components/gameOfLife/pattern.tsx";
 import { Cell } from "../components/gameOfLife/cell.tsx";
-import { SetNewCellConditions } from "../components/gameOfLife/cellCondition.tsx";
+import {
+  SetNewCellConditions,
+  copyOf2dArray,
+} from "../components/gameOfLife/cellCondition.tsx";
 
 export const DIMENTIONS = 50;
 
@@ -70,6 +73,11 @@ export const GameOfLife = () => {
     setState({ ...state, speed: newSpeed });
   };
 
+  const handleCellClick = ({ column, row }) => {
+    state.alive[column][row] = !state.alive[column][row];
+    setState({ ...state, alive: state.alive });
+  };
+
   return (
     <div className="flex-row mt-4">
       <div className="mr-4">
@@ -82,8 +90,7 @@ export const GameOfLife = () => {
                     key={`${column}-${row}`}
                     alive={state.alive[column][row]}
                     handleClick={() => {
-                      state.alive[column][row] = !state.alive[column][row];
-                      setState({ ...state });
+                      handleCellClick({ column, row });
                     }}
                   />
                 );
@@ -107,7 +114,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleClear({ state, setState });
+              const alive = GetClear();
+              setState({ ...state, alive, evolutions: 0, started: false });
             }}
           >
             Clear
@@ -141,7 +149,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleBlinker({ state, setState });
+              const alive = GetBlinker({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Blinker
@@ -151,7 +160,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandlePulsar({ state, setState });
+              const alive = GetPulsar({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Pulsar
@@ -161,7 +171,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleGlider({ state, setState });
+              const alive = GetGlider({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Glider
@@ -171,7 +182,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleTheRPentomino({ state, setState });
+              const alive = GetTheRPentomino({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             R-pentomino
@@ -181,7 +193,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleDieHard({ state, setState });
+              const alive = GetDieHard({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Die Hard
@@ -191,7 +204,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleAcorn({ state, setState });
+              const alive = GetAcorn({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Acorn
@@ -201,7 +215,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleSpaceship({ state, setState });
+              const alive = GetSpaceship({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Spaceship
@@ -211,7 +226,8 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              HandleRandom({ state, setState });
+              const alive = GetRandom({ state, setState });
+              setState({ ...state, alive, evolutions: 0 });
             }}
           >
             Random
