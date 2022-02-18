@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { MdNotificationsNone } from "react-icons/md";
 import { FiPower } from "react-icons/fi";
@@ -14,8 +14,25 @@ const modalStyles = {
   },
 };
 
-export const Headerbar = () => {
+interface props {
+  loginName: string;
+}
+
+export const Headerbar = (props: props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [state, setState] = useState({
+    username: "",
+    userInput: "",
+  });
+
+  useEffect(() => {
+    setState({
+      ...state,
+      username: props.loginName,
+      userInput: props.loginName,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   function openModal() {
     setIsOpen(true);
@@ -24,11 +41,6 @@ export const Headerbar = () => {
   function closeModal() {
     setIsOpen(false);
   }
-
-  const [state, setState] = useState({
-    username: "Mr. Userman",
-    userInput: "Mr. Userman",
-  });
 
   const onNameChange = (value: string) => {
     setState({ ...state, userInput: value });
@@ -60,6 +72,7 @@ export const Headerbar = () => {
           </div>
         </div>
       </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -67,26 +80,28 @@ export const Headerbar = () => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <div className="w-80">
-          <div className="text-xl">{`Hello ${state.username}`}</div>
-          <div>Have a good day!</div>
-          <div className="mt-8">
-            <input
-              className="border w-2/3 h-8"
-              value={state.userInput}
-              onChange={(e) => {
-                onNameChange(e.target.value);
-              }}
-            ></input>
-            <button
-              className="border bg-gray-100 ml-4 w-1/4 h-8"
-              onClick={() => {
-                onNameUpdate(state.userInput);
-                closeModal();
-              }}
-            >
-              Update
-            </button>
+        <div>
+          <div className="w-80">
+            <div className="text-xl">{`Hello ${state.username}`}</div>
+            <div>Have a good day!</div>
+            <div className="mt-8">
+              <input
+                className="border w-2/3 h-8"
+                value={state.userInput}
+                onChange={(e) => {
+                  onNameChange(e.target.value);
+                }}
+              ></input>
+              <button
+                className="border bg-gray-200 ml-4 w-1/4 h-8"
+                onClick={() => {
+                  onNameUpdate(state.userInput);
+                  closeModal();
+                }}
+              >
+                Update
+              </button>
+            </div>
           </div>
         </div>
       </Modal>
