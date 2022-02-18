@@ -1,15 +1,55 @@
+import { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { MdNotificationsNone } from "react-icons/md";
 import { FiPower } from "react-icons/fi";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 export const Headerbar = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const [state, setState] = useState({
+    username: "Mr. Userman",
+    userInput: "Mr. Userman",
+  });
+
+  const onNameChange = (value: string) => {
+    setState({ ...state, userInput: value });
+  };
+
+  const onNameUpdate = (value: string) => {
+    setState({ ...state, username: value });
+  };
+
   return (
     <div className="w-screen">
       <div className="bg-blue-500 w-full h-20 shadow-md">
         <div className="flex-row h-full items-center">
           <div className="flex w-1/6 justify-center">
-            <FaUserAlt size={30} className="cursor-pointer" />
-            <div className="ml-2 text-xl">Mr. Userman</div>
+            <FaUserAlt
+              size={30}
+              className="cursor-pointer"
+              onClick={openModal}
+            />
+            <div className="ml-2 text-xl">{`${state.username}`}</div>
           </div>
           <div className="flex w-2/3 justify-center">
             <MdNotificationsNone size={30} className="cursor-pointer" />
@@ -21,6 +61,35 @@ export const Headerbar = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="w-80">
+          <div className="text-xl">{`Hello ${state.username}`}</div>
+          <div>Have a good day!</div>
+          <div className="mt-8">
+            <input
+              className="border w-2/3 h-8"
+              value={state.userInput}
+              onChange={(e) => {
+                onNameChange(e.target.value);
+              }}
+            ></input>
+            <button
+              className="border bg-gray-100 ml-4 w-1/4 h-8"
+              onClick={() => {
+                onNameUpdate(state.userInput);
+                closeModal();
+              }}
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
