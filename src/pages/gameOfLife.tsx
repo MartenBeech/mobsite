@@ -12,10 +12,7 @@ import {
   GetRandom,
 } from "../components/gameOfLife/pattern.tsx";
 import { Cell } from "../components/gameOfLife/cell.tsx";
-import {
-  SetNewCellConditions,
-  copyOf2dArray,
-} from "../components/gameOfLife/cellCondition.tsx";
+import { SetNewCellConditions } from "../components/gameOfLife/cellCondition.tsx";
 
 export const DIMENTIONS = 50;
 
