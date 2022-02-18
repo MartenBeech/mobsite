@@ -8,6 +8,7 @@ import {
   HandlePulsar,
   HandleGlider,
   HandleTheRPentomino,
+  HandleSpaceship,
   HandleRandom,
 } from "../components/gameOfLife/pattern.tsx";
 import { Cell } from "../components/gameOfLife/cell.tsx";
@@ -22,6 +23,7 @@ export const GameOfLife = () => {
     alive: [[false]],
     speed: 3,
     started: false,
+    evolutions: 0,
   });
   useEffect(() => {
     const columns: Array<number> = [];
@@ -113,7 +115,7 @@ export const GameOfLife = () => {
         </div>
         <div>
           <button
-            className="border border-slate-300 bg-gray-100 w-1/12 mt-4 mb-4"
+            className="border border-slate-300 bg-gray-100 w-1/12 mt-4"
             onClick={() => {
               updateSpeed(false);
             }}
@@ -131,6 +133,9 @@ export const GameOfLife = () => {
           >
             +
           </button>
+        </div>
+        <div>
+          <div className="w-1/3 mb-4">Evolutions: {state.evolutions}</div>
         </div>
         <div>
           <button
@@ -190,6 +195,16 @@ export const GameOfLife = () => {
             }}
           >
             Acorn
+          </button>
+        </div>
+        <div>
+          <button
+            className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
+            onClick={() => {
+              HandleSpaceship({ state, setState });
+            }}
+          >
+            Spaceship
           </button>
         </div>
         <div>

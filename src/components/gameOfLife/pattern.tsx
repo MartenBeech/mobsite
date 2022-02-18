@@ -15,7 +15,12 @@ export const HandleClear = (props: props) => {
     }
   }
 
-  props.setState({ ...props.state, alive: alive });
+  props.setState({
+    ...props.state,
+    alive: alive,
+    evolutions: 0,
+    started: false,
+  });
 };
 
 export const HandleBlinker = (props: props) => {
@@ -192,6 +197,148 @@ export const HandleAcorn = (props: props) => {
   alive[c + 1][c + 3] = true;
   alive[c + 1][c - 2] = true;
   alive[c + 1][c - 3] = true;
+
+  props.setState({ ...props.state, alive: alive });
+};
+
+export const HandleSpaceship = (props: props) => {
+  let alive: boolean[][] = [];
+  for (let i = 0; i < DIMENTIONS; i++) {
+    alive.push([false]);
+    for (let j = 0; j < DIMENTIONS; j++) {
+      alive[i][j] = false;
+    }
+  }
+
+  const c = DIMENTIONS / 2 - 1;
+
+  alive[c - 9][c + 2] = true;
+  alive[c - 10][c + 1] = true;
+  alive[c - 10][c + 3] = true;
+  alive[c - 11][c + 1] = true;
+  alive[c - 12][c + 2] = true;
+  alive[c - 12][c + 3] = true;
+  alive[c - 12][c + 5] = true;
+  alive[c - 13][c + 5] = true;
+  alive[c - 17][c + 6] = true;
+  alive[c - 17][c + 7] = true;
+  alive[c - 18][c + 6] = true;
+  alive[c - 18][c + 7] = true;
+  alive[c - 11][c + 12] = true;
+  alive[c - 11][c + 13] = true;
+  alive[c - 12][c + 11] = true;
+  alive[c - 12][c + 14] = true;
+  alive[c - 13][c + 11] = true;
+  alive[c - 13][c + 13] = true;
+  alive[c - 14][c + 12] = true;
+  alive[c - 2][c + 9] = true;
+  alive[c - 1][c + 10] = true;
+  alive[c - 3][c + 10] = true;
+  alive[c - 1][c + 11] = true;
+  alive[c - 2][c + 12] = true;
+  alive[c - 3][c + 12] = true;
+  alive[c - 5][c + 12] = true;
+  alive[c - 5][c + 13] = true;
+  alive[c - 6][c + 17] = true;
+  alive[c - 7][c + 17] = true;
+  alive[c - 6][c + 18] = true;
+  alive[c - 7][c + 18] = true;
+
+  alive[c + 9][c + 2] = true;
+  alive[c + 10][c + 1] = true;
+  alive[c + 10][c + 3] = true;
+  alive[c + 11][c + 1] = true;
+  alive[c + 12][c + 2] = true;
+  alive[c + 12][c + 3] = true;
+  alive[c + 12][c + 5] = true;
+  alive[c + 13][c + 5] = true;
+  alive[c + 17][c + 6] = true;
+  alive[c + 17][c + 7] = true;
+  alive[c + 18][c + 6] = true;
+  alive[c + 18][c + 7] = true;
+  alive[c + 11][c + 12] = true;
+  alive[c + 11][c + 13] = true;
+  alive[c + 12][c + 11] = true;
+  alive[c + 12][c + 14] = true;
+  alive[c + 13][c + 11] = true;
+  alive[c + 13][c + 13] = true;
+  alive[c + 14][c + 12] = true;
+  alive[c + 2][c + 9] = true;
+  alive[c + 1][c + 10] = true;
+  alive[c + 3][c + 10] = true;
+  alive[c + 1][c + 11] = true;
+  alive[c + 2][c + 12] = true;
+  alive[c + 3][c + 12] = true;
+  alive[c + 5][c + 12] = true;
+  alive[c + 5][c + 13] = true;
+  alive[c + 6][c + 17] = true;
+  alive[c + 7][c + 17] = true;
+  alive[c + 6][c + 18] = true;
+  alive[c + 7][c + 18] = true;
+
+  alive[c + 9][c - 2] = true;
+  alive[c + 10][c - 1] = true;
+  alive[c + 10][c - 3] = true;
+  alive[c + 11][c - 1] = true;
+  alive[c + 12][c - 2] = true;
+  alive[c + 12][c - 3] = true;
+  alive[c + 12][c - 5] = true;
+  alive[c + 13][c - 5] = true;
+  alive[c + 17][c - 6] = true;
+  alive[c + 17][c - 7] = true;
+  alive[c + 18][c - 6] = true;
+  alive[c + 18][c - 7] = true;
+  alive[c + 11][c - 12] = true;
+  alive[c + 11][c - 13] = true;
+  alive[c + 12][c - 11] = true;
+  alive[c + 12][c - 14] = true;
+  alive[c + 13][c - 11] = true;
+  alive[c + 13][c - 13] = true;
+  alive[c + 14][c - 12] = true;
+  alive[c + 2][c - 9] = true;
+  alive[c + 1][c - 10] = true;
+  alive[c + 3][c - 10] = true;
+  alive[c + 1][c - 11] = true;
+  alive[c + 2][c - 12] = true;
+  alive[c + 3][c - 12] = true;
+  alive[c + 5][c - 12] = true;
+  alive[c + 5][c - 13] = true;
+  alive[c + 6][c - 17] = true;
+  alive[c + 7][c - 17] = true;
+  alive[c + 6][c - 18] = true;
+  alive[c + 7][c - 18] = true;
+
+  alive[c - 9][c - 2] = true;
+  alive[c - 10][c - 1] = true;
+  alive[c - 10][c - 3] = true;
+  alive[c - 11][c - 1] = true;
+  alive[c - 12][c - 2] = true;
+  alive[c - 12][c - 3] = true;
+  alive[c - 12][c - 5] = true;
+  alive[c - 13][c - 5] = true;
+  alive[c - 17][c - 6] = true;
+  alive[c - 17][c - 7] = true;
+  alive[c - 18][c - 6] = true;
+  alive[c - 18][c - 7] = true;
+  alive[c - 11][c - 12] = true;
+  alive[c - 11][c - 13] = true;
+  alive[c - 12][c - 11] = true;
+  alive[c - 12][c - 14] = true;
+  alive[c - 13][c - 11] = true;
+  alive[c - 13][c - 13] = true;
+  alive[c - 14][c - 12] = true;
+  alive[c - 2][c - 9] = true;
+  alive[c - 1][c - 10] = true;
+  alive[c - 3][c - 10] = true;
+  alive[c - 1][c - 11] = true;
+  alive[c - 2][c - 12] = true;
+  alive[c - 3][c - 12] = true;
+  alive[c - 5][c - 12] = true;
+  alive[c - 5][c - 13] = true;
+  alive[c - 6][c - 17] = true;
+  alive[c - 7][c - 17] = true;
+  alive[c - 6][c - 18] = true;
+  alive[c - 7][c - 18] = true;
 
   props.setState({ ...props.state, alive: alive });
 };

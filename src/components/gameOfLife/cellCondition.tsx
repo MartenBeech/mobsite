@@ -48,6 +48,7 @@ export const SetNewCellConditions = (props: props) => {
   props.setState({
     ...props.state,
     alive: alive,
+    evolutions: props.state.evolutions + 1,
   });
 };
 

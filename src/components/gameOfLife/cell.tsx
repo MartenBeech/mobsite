@@ -1,9 +1,15 @@
+import { memo } from "react";
+
 interface props {
   alive: boolean;
   handleClick;
 }
 
-export const Cell = (props: props) => {
+const isCellUpdated = (prevProps, nextProps) => {
+  return prevProps.alive === nextProps.alive;
+};
+
+export const Cell = memo(function Cell(props: props) {
   return (
     <div>
       {props.alive ? (
@@ -23,4 +29,4 @@ export const Cell = (props: props) => {
       )}
     </div>
   );
-};
+}, isCellUpdated);
