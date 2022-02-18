@@ -4,13 +4,12 @@ import { MdNotificationsNone } from "react-icons/md";
 import { FiPower } from "react-icons/fi";
 import Modal from "react-modal";
 
-const customStyles = {
+const modalStyles = {
   content: {
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
-    marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
 };
@@ -64,8 +63,9 @@ export const Headerbar = () => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
+        style={modalStyles}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
         <div className="w-80">
           <div className="text-xl">{`Hello ${state.username}`}</div>
