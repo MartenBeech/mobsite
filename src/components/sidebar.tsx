@@ -6,9 +6,21 @@ import { StarGame } from "../pages/starGame";
 import { IngredientTable } from "../pages/ingredientTable";
 import { RandomUsers } from "../pages/randomUsers";
 import { GameOfLife } from "../pages/gameOfLife";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Dungeon } from "../pages/dungeon";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 
-export const Sidebar = () => {
+interface sidebarProps {
+  loginName: string;
+}
+
+export const Sidebar = (props: sidebarProps) => {
   const [state, setState] = useState({ currentLink: "" });
 
   useEffect(() => {
@@ -16,60 +28,80 @@ export const Sidebar = () => {
   }, []);
 
   return (
-    <Router>
-      <div>
-        <div className="flex flex-row mr-4 shadow-lg">
-          <div className="box-border bg-blue-400 w-40 h-screen">
-            <Button state={state} setState={setState} text="Home" link={"/"} />
-            <Button
-              state={state}
-              setState={setState}
-              text="Incrementer"
-              link={"/incrementer"}
-            />
-            <Button
-              state={state}
-              setState={setState}
-              text="Current Time"
-              link={"/current-time"}
-            />
-            <Button
-              state={state}
-              setState={setState}
-              text="Ingredient Table"
-              link={"/ingredient-table"}
-            />
-            <Button
-              state={state}
-              setState={setState}
-              text="Star Game"
-              link={"/star-game"}
-            />
-            <Button
-              state={state}
-              setState={setState}
-              text="Game of Life"
-              link={"/game-of-life"}
-            />
-            <Button
-              state={state}
-              setState={setState}
-              text="Random User Table"
-              link={"/random-user-table"}
-            />
+    <div className="flex h-full">
+      <Router>
+        <div className="flex">
+          <div className="flex mr-4 shadow-lg">
+            <div className="box-border bg-gray-400 w-48">
+              <div className="m-4">
+                <div className="flex justify-center mb-8">
+                  <FaUserAlt size={30} />
+                  <div className="ml-2 text-xl">{`${props.loginName}`}</div>
+                </div>
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Home"
+                  link={"/"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Incrementer"
+                  link={"/incrementer"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Current Time"
+                  link={"/current-time"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Ingredient Table"
+                  link={"/ingredient-table"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Star Game"
+                  link={"/star-game"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Game of Life"
+                  link={"/game-of-life"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Random User Table"
+                  link={"/random-user-table"}
+                />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Dungeon"
+                  link={"/dungeon"}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/incrementer" element={<Incrementer />}></Route>
-        <Route path="/current-time" element={<CurrentTime />}></Route>
-        <Route path="/ingredient-table" element={<IngredientTable />}></Route>
-        <Route path="/star-game" element={<StarGame />}></Route>
-        <Route path="/game-of-life" element={<GameOfLife />}></Route>
-        <Route path="/random-user-table" element={<RandomUsers />}></Route>
-      </Routes>
-    </Router>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/incrementer" element={<Incrementer />}></Route>
+          <Route path="/current-time" element={<CurrentTime />}></Route>
+          <Route path="/ingredient-table" element={<IngredientTable />}></Route>
+          <Route path="/star-game" element={<StarGame />}></Route>
+          <Route path="/game-of-life" element={<GameOfLife />}></Route>
+          <Route path="/random-user-table" element={<RandomUsers />}></Route>
+          <Route path="/dungeon" element={<Dungeon />}></Route>
+        </Routes>
+      </Router>
+    </div>
   );
 };
 
@@ -87,18 +119,14 @@ interface buttonProps {
 }
 
 const Button = (props: buttonProps) => {
-  const classNameCurrentLink = "border border-black rounded bg-gray-500 h-10";
-  const classNameNotCurrentLink =
-    "border border-black rounded bg-gray-300 h-10";
-
   return (
     <Link to={`${props.link}`}>
-      <div className="flex flex-column ml-2 mr-2 mt-4">
+      <div className="flex flex-column mt-4">
         <button
           className={
-            props.link === props.state.currentLink
-              ? classNameCurrentLink
-              : classNameNotCurrentLink
+            props.link != useLocation().pathname
+              ? "border border-black rounded h-10 w-full text-white bg-button-bg hover:bg-button-hover"
+              : "border border-black rounded h-10 w-full text-white bg-button-bg cursor-default opacity-50"
           }
           onClick={() => {
             props.setState({ currentLink: props.link });

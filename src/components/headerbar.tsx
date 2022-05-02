@@ -50,10 +50,10 @@ export const Headerbar = (props: props) => {
   };
 
   return (
-    <div className="w-screen">
+    <div className="flex w-full">
       <div className="bg-blue-500 w-full h-20 shadow-md">
-        <div className="flex-row h-full items-center">
-          <div className="flex w-1/6 justify-center">
+        <div className="flex h-full items-center justify-between">
+          <div className="flex justify-center">
             <FaUserAlt
               size={30}
               className="cursor-pointer"
@@ -61,11 +61,11 @@ export const Headerbar = (props: props) => {
             />
             <div className="ml-2 text-xl">{`${state.username}`}</div>
           </div>
-          <div className="flex w-2/3 justify-center">
+          <div className="flex justify-center">
             <MdNotificationsNone size={30} className="cursor-pointer" />
             <div className="ml-2 text-xl">Notifications</div>
           </div>
-          <div className="flex w-1/6 justify-center">
+          <div className="flex justify-center">
             <FiPower size={30} className="cursor-pointer" />
             <div className="ml-2 text-xl">Log out</div>
           </div>

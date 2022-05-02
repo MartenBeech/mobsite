@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Sidebar } from "./components/sidebar";
-import { Headerbar } from "./components/headerbar";
 import { Login } from "./components/login";
 
 export const App = () => {
@@ -12,11 +11,8 @@ export const App = () => {
   }
 
   return (
-    <div className="flex-column">
-      <Headerbar loginName={loginName} />
-      <div className="flex">
-        <Sidebar />
-      </div>
+    <div className="h-screen w-screen">
+      <Sidebar loginName={loginName} />
     </div>
   );
 };
