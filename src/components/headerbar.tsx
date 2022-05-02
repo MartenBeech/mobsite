@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { MdNotificationsNone } from "react-icons/md";
 import { FiPower } from "react-icons/fi";
@@ -31,7 +31,6 @@ export const Headerbar = (props: props) => {
       username: props.loginName,
       userInput: props.loginName,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   function openModal() {

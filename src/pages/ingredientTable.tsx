@@ -1,6 +1,5 @@
-// @ts-nocheck
-import { useState, useEffect } from "react";
-import { Table } from "../components/table/table.tsx";
+import React, { useState, useEffect } from "react";
+import { Table } from "../components/table/table";
 
 export interface rowData {
   name: string;
@@ -20,7 +19,6 @@ export const IngredientTable = () => {
       ...state,
       data: tableData,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputName = (e: React.FormEvent<HTMLInputElement>) => {

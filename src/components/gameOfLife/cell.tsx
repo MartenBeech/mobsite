@@ -1,11 +1,15 @@
-import { memo } from "react";
+import React, { memo } from "react";
 
 interface props {
   alive: boolean;
-  handleClick;
+  handleClick: () => void;
 }
 
-const isCellUpdated = (prevProps, nextProps) => {
+interface props {
+  alive: boolean;
+}
+
+const isCellUpdated = (prevProps: props, nextProps: props) => {
   return prevProps.alive === nextProps.alive;
 };
 

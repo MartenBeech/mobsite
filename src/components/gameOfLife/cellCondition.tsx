@@ -1,10 +1,12 @@
-interface props {
-  state: any;
-  setState: any;
+import { State } from "../../pages/gameOfLife";
+
+interface setNewCellConditionsProps {
+  state: State;
+  setState: (value: React.SetStateAction<State>) => void;
 }
 
-export const SetNewCellConditions = (props: props) => {
-  let alive: boolean[][] = copyOf2dArray({ state: props.state });
+export const SetNewCellConditions = (props: setNewCellConditionsProps) => {
+  const alive: boolean[][] = copyOf2dArray({ state: props.state });
 
   for (let i = 0; i < props.state.columns.length; i++) {
     for (let j = 0; j < props.state.rows.length; j++) {
@@ -52,18 +54,27 @@ export const SetNewCellConditions = (props: props) => {
   });
 };
 
-export const copyOf2dArray = ({ state }) => {
-  let alive: boolean[][] = [];
-  state.columns.map((column: number) => {
+interface copyOf2dArrayProps {
+  state: State;
+}
+
+export const copyOf2dArray = (props: copyOf2dArrayProps) => {
+  const alive: boolean[][] = [];
+  props.state.columns.map((column: number) => {
     alive.push([]);
-    return state.rows.map((row: number) => {
-      return (alive[column][row] = state.alive[column][row]);
+    return props.state.rows.map((row: number) => {
+      return (alive[column][row] = props.state.alive[column][row]);
     });
   });
   return alive;
 };
 
-const isCellAlive = (column: number, row: number, props: props) => {
+interface isCellAliveProps {
+  state: State;
+  setState: (value: React.SetStateAction<State>) => void;
+}
+
+const isCellAlive = (column: number, row: number, props: isCellAliveProps) => {
   if (
     row < 0 ||
     column < 0 ||

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const Incrementer = (): JSX.Element => {
   const [counter, setCounter] = useState(0);

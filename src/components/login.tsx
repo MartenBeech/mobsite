@@ -1,28 +1,38 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-async function loginUser(credentials) {
+interface loginUserProps {
+  username: string;
+  password: string;
+}
+
+async function loginUser(props: loginUserProps) {
   return fetch("http://localhost:8080/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials),
+    body: JSON.stringify(props),
   }).then((data) => data.json());
 }
 
-export function Login({ setToken, setLoginName }) {
+interface loginProps {
+  setToken: React.Dispatch<React.SetStateAction<string>>;
+  setLoginName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function Login(props: loginProps) {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = await loginUser({
       username,
       password,
     });
-    setToken(token);
-    setLoginName(username);
+    props.setToken(token);
+    props.setLoginName(username);
   };
 
   return (

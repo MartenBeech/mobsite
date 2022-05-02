@@ -1,12 +1,11 @@
-// @ts-nocheck
-import { useState, useEffect } from "react";
-import { Home } from "../pages/home.tsx";
-import { Incrementer } from "../pages/incrementer.tsx";
-import { CurrentTime } from "../pages/currentTime.tsx";
-import { StarGame } from "../pages/starGame.tsx";
-import { IngredientTable } from "../pages/ingredientTable.tsx";
-import { RandomUsers } from "../pages/randomUsers.tsx";
-import { GameOfLife } from "../pages/gameOfLife.tsx";
+import React, { useState, useEffect } from "react";
+import { Home } from "../pages/home";
+import { Incrementer } from "../pages/incrementer";
+import { CurrentTime } from "../pages/currentTime";
+import { StarGame } from "../pages/starGame";
+import { IngredientTable } from "../pages/ingredientTable";
+import { RandomUsers } from "../pages/randomUsers";
+import { GameOfLife } from "../pages/gameOfLife";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 export const Sidebar = () => {
@@ -74,25 +73,38 @@ export const Sidebar = () => {
   );
 };
 
-const Button = ({ state, setState, text, link }) => {
+interface buttonProps {
+  state: {
+    currentLink: string;
+  };
+  setState: React.Dispatch<
+    React.SetStateAction<{
+      currentLink: string;
+    }>
+  >;
+  text: string;
+  link: string;
+}
+
+const Button = (props: buttonProps) => {
   const classNameCurrentLink = "border border-black rounded bg-gray-500 h-10";
   const classNameNotCurrentLink =
     "border border-black rounded bg-gray-300 h-10";
 
   return (
-    <Link to={`${link}`}>
+    <Link to={`${props.link}`}>
       <div className="flex flex-column ml-2 mr-2 mt-4">
         <button
           className={
-            link === state.currentLink
+            props.link === props.state.currentLink
               ? classNameCurrentLink
               : classNameNotCurrentLink
           }
           onClick={() => {
-            setState({ currentLink: link });
+            props.setState({ currentLink: props.link });
           }}
         >
-          {text}
+          {props.text}
         </button>
       </div>
     </Link>

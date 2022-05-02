@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   GetClear,
   GetBlinker,
@@ -10,11 +9,20 @@ import {
   GetTheRPentomino,
   GetSpaceship,
   GetRandom,
-} from "../components/gameOfLife/pattern.tsx";
-import { Cell } from "../components/gameOfLife/cell.tsx";
-import { SetNewCellConditions } from "../components/gameOfLife/cellCondition.tsx";
+} from "../components/gameOfLife/pattern";
+import { Cell } from "../components/gameOfLife/cell";
+import { SetNewCellConditions } from "../components/gameOfLife/cellCondition";
 
 export const DIMENTIONS = 50;
+
+export interface State {
+  columns: number[];
+  rows: number[];
+  alive: boolean[][];
+  speed: number;
+  started: boolean;
+  evolutions: number;
+}
 
 export const GameOfLife = () => {
   const [state, setState] = useState({
@@ -24,7 +32,7 @@ export const GameOfLife = () => {
     speed: 3,
     started: false,
     evolutions: 0,
-  });
+  } as State);
   useEffect(() => {
     const columns: Array<number> = [];
     for (let i = 0; i < DIMENTIONS; i++) {
@@ -36,7 +44,7 @@ export const GameOfLife = () => {
       rows.push(i);
     }
 
-    let alive: boolean[][] = [];
+    const alive: boolean[][] = [];
     for (let i = 0; i < DIMENTIONS; i++) {
       alive.push([false]);
       for (let j = 0; j < DIMENTIONS; j++) {
@@ -45,7 +53,6 @@ export const GameOfLife = () => {
     }
 
     setState({ ...state, columns: columns, rows: rows, alive: alive });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -70,8 +77,14 @@ export const GameOfLife = () => {
     setState({ ...state, speed: newSpeed });
   };
 
-  const handleCellClick = ({ column, row }) => {
-    state.alive[column][row] = !state.alive[column][row];
+  interface handleCellClickProps {
+    column: number;
+    row: number;
+  }
+
+  const handleCellClick = (props: handleCellClickProps) => {
+    state.alive[props.column][props.row] =
+      !state.alive[props.column][props.row];
     setState({ ...state, alive: state.alive });
   };
 
@@ -146,7 +159,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetBlinker({ state, setState });
+              const alive = GetBlinker();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -157,7 +170,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetPulsar({ state, setState });
+              const alive = GetPulsar();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -168,7 +181,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetGlider({ state, setState });
+              const alive = GetGlider();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -179,7 +192,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetTheRPentomino({ state, setState });
+              const alive = GetTheRPentomino();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -190,7 +203,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetDieHard({ state, setState });
+              const alive = GetDieHard();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -201,7 +214,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetAcorn({ state, setState });
+              const alive = GetAcorn();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -212,7 +225,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetSpaceship({ state, setState });
+              const alive = GetSpaceship();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >
@@ -223,7 +236,7 @@ export const GameOfLife = () => {
           <button
             className="border border-slate-300 bg-gray-100 w-1/3 mt-4"
             onClick={() => {
-              const alive = GetRandom({ state, setState });
+              const alive = GetRandom();
               setState({ ...state, alive, evolutions: 0 });
             }}
           >

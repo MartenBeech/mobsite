@@ -1,6 +1,5 @@
-// @ts-nocheck
-import { useState } from "react";
-import { RandomUser } from "../components/randomUser.tsx";
+import React, { useState } from "react";
+import { RandomUser } from "../components/randomUser";
 
 export const RandomUsers = () => {
   const [state] = useState({

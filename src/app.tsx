@@ -1,8 +1,7 @@
-// @ts-nocheck
-import { useState } from "react";
-import { Sidebar } from "./components/sidebar.tsx";
-import { Headerbar } from "./components/headerbar.tsx";
-import { Login } from "./components/login.tsx";
+import React, { useState } from "react";
+import { Sidebar } from "./components/sidebar";
+import { Headerbar } from "./components/headerbar";
+import { Login } from "./components/login";
 
 export const App = () => {
   const [token, setToken] = useState("");

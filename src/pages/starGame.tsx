@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { VscStarFull } from "react-icons/vsc";
 
 export const StarGame = () => {
@@ -32,7 +32,7 @@ export const StarGame = () => {
   const handleNumberClick = (value: number) => {
     let numbersAvailable = [...state.numbersAvailable];
     let numbersInUse = [...state.numbersInUse];
-    let numbersCompleted = [...state.numbersCompleted];
+    const numbersCompleted = [...state.numbersCompleted];
     let sum = state.sum;
     let stars = state.stars;
     if (getNumberUnused(value)) {

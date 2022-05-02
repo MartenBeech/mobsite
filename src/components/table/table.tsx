@@ -1,7 +1,6 @@
-// @ts-nocheck
-import { useState, useEffect } from "react";
-import { TableRowProps } from "./tableRow.tsx";
-import { TableRow } from "./tableRow.tsx";
+import React, { useState, useEffect } from "react";
+import { TableRowProps } from "./tableRow";
+import { TableRow } from "./tableRow";
 
 export interface tableProps {
   data: Array<TableRowProps>;

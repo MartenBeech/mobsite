@@ -1,8 +1,7 @@
-// @ts-nocheck
-import { DIMENTIONS } from "../../pages/gameOfLife.tsx";
+import { DIMENTIONS } from "../../pages/gameOfLife";
 
 export const GetClear = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -14,7 +13,7 @@ export const GetClear = () => {
 };
 
 export const GetBlinker = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -44,7 +43,7 @@ export const GetBlinker = () => {
 };
 
 export const GetPulsar = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -110,7 +109,7 @@ export const GetPulsar = () => {
 };
 
 export const GetGlider = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -128,7 +127,7 @@ export const GetGlider = () => {
 };
 
 export const GetTheRPentomino = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -148,7 +147,7 @@ export const GetTheRPentomino = () => {
 };
 
 export const GetDieHard = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -170,7 +169,7 @@ export const GetDieHard = () => {
 };
 
 export const GetAcorn = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -192,7 +191,7 @@ export const GetAcorn = () => {
 };
 
 export const GetSpaceship = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
@@ -334,7 +333,7 @@ export const GetSpaceship = () => {
 };
 
 export const GetRandom = () => {
-  let alive: boolean[][] = [];
+  const alive: boolean[][] = [];
   for (let i = 0; i < DIMENTIONS; i++) {
     alive.push([false]);
     for (let j = 0; j < DIMENTIONS; j++) {
