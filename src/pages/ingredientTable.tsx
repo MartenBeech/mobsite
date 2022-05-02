@@ -41,7 +41,7 @@ export const IngredientTable = () => {
     });
   };
 
-  const handleClickAdd = (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleClickAdd = () => {
     if (state.inputName && state.inputAmount) {
       const addedData: rowData = {
         name: state.inputName,
@@ -84,8 +84,8 @@ export const IngredientTable = () => {
         />
         <button
           className="border bg-gray-100 w-20 h-10 mt-5 ml-6"
-          onClick={(e: React.FormEvent<HTMLButtonElement>) => {
-            handleClickAdd(e);
+          onClick={() => {
+            handleClickAdd();
           }}
         >
           Add
