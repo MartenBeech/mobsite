@@ -24,7 +24,7 @@ export function DungeonTile(props: props) {
       {road === Tile.Road ? (
         <div className="w-4 h-4 border border-black bg-gray-100"></div>
       ) : road === Tile.Wall ? (
-        <div className="w-4 h-4 border border-gray-100 bg-black"></div>
+        <div className="w-4 h-4 border border-black bg-black"></div>
       ) : road === Tile.Start ? (
         <div className="w-4 h-4 border border-black bg-green-500"></div>
       ) : road === Tile.End ? (
