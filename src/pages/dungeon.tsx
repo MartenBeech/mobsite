@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { DungeonTile } from "../components/dungeonTile";
+import { DungeonTile, Tile } from "../components/dungeonTile";
+import {
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+} from "react-icons/bs";
 
-const DIMENTIONS = 50;
-const N_BOXES = 25;
-const BOX_MAX_SIZE = Math.floor(DIMENTIONS / 20);
+const BOX_MAX_SIZE = 3;
 
 export interface State {
   columns: number[];
   rows: number[];
-  roads: boolean[][];
+  roads: Tile[][];
+  dimentions: number;
+  rooms: number;
 }
 
 export function Dungeon() {
@@ -16,39 +20,45 @@ export function Dungeon() {
     columns: [],
     rows: [],
     roads: [],
+    dimentions: 50,
+    rooms: 25,
   } as State);
 
-  useEffect(() => {
+  const newDungeon = () => {
     const columns: Array<number> = [];
     const rows: Array<number> = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
+    for (let i = 0; i < state.dimentions; i++) {
       columns.push(i);
       rows.push(i);
     }
 
-    const roads: boolean[][] = [];
-    for (let i = 0; i < DIMENTIONS; i++) {
-      roads.push([false]);
-      for (let j = 0; j < DIMENTIONS; j++) {
-        roads[i][j] = false;
+    const roads: Tile[][] = [];
+    for (let i = 0; i < state.dimentions; i++) {
+      roads.push([Tile.Wall]);
+      for (let j = 0; j < state.dimentions; j++) {
+        roads[i][j] = Tile.Wall;
       }
     }
 
-    createBoxes(roads);
+    createRooms(roads);
 
     setState({ ...state, columns: columns, rows: rows, roads: roads });
-  }, []);
+  };
 
-  const createBoxes = (roads: boolean[][]) => {
+  useEffect(() => {
+    newDungeon();
+  }, [state.dimentions, state.rooms]);
+
+  const createRooms = (roads: Tile[][]) => {
     let centerFrom = { x: 0, y: 0 };
     let centerTo = { x: 0, y: 0 };
 
-    for (let i = 0; i < N_BOXES; i++) {
+    for (let i = 0; i < state.rooms; i++) {
       const rndCenterX =
-        Math.floor(Math.random() * (DIMENTIONS - BOX_MAX_SIZE * 2)) +
+        Math.floor(Math.random() * (state.dimentions - BOX_MAX_SIZE * 2)) +
         BOX_MAX_SIZE;
       const rndCenterY =
-        Math.floor(Math.random() * (DIMENTIONS - BOX_MAX_SIZE * 2)) +
+        Math.floor(Math.random() * (state.dimentions - BOX_MAX_SIZE * 2)) +
         BOX_MAX_SIZE;
 
       const rndLeft = Math.floor(Math.random() * BOX_MAX_SIZE);
@@ -58,7 +68,7 @@ export function Dungeon() {
 
       for (let x = rndCenterX - rndLeft; x <= rndCenterX + rndRight; x++) {
         for (let y = rndCenterY - rndUp; y <= rndCenterY + rndDown; y++) {
-          roads[y][x] = true;
+          roads[y][x] = Tile.Road;
         }
       }
 
@@ -71,11 +81,18 @@ export function Dungeon() {
         });
       }
       centerFrom = { y: rndCenterY, x: rndCenterX };
+
+      if (i === 0) {
+        roads[rndCenterY][rndCenterX] = Tile.Start;
+      }
+      if (i === state.rooms - 1) {
+        roads[rndCenterY][rndCenterX] = Tile.End;
+      }
     }
   };
 
   interface linkBoxesProps {
-    roads: boolean[][];
+    roads: Tile[][];
     centerFrom: { y: number; x: number };
     centerTo: { y: number; x: number };
   }
@@ -119,13 +136,89 @@ export function Dungeon() {
         : rndDir === "up"
         ? (currentPos.y -= 1)
         : null;
-      props.roads[currentPos.y][currentPos.x] = true;
+      props.roads[currentPos.y][currentPos.x] = Tile.Road;
       directions.splice(rndNumber, 1);
     }
   };
 
   return (
-    <div>
+    <div className="flex">
+      <div className="flex flex-col mr-4">
+        <button
+          className="border border-black h-10 w-60 mt-4 bg-mob-blue-dark text-white hover:bg-mob-blue-light rounded"
+          onClick={() => {
+            newDungeon();
+          }}
+        >
+          New Dungeon
+        </button>
+        <div className="flex mt-4">
+          <BsFillArrowLeftSquareFill
+            className="text-mob-blue-dark hover:text-mob-blue-light"
+            size={40}
+            onClick={() => {
+              setState({
+                ...state,
+                dimentions:
+                  state.dimentions > 10
+                    ? state.dimentions - 5
+                    : state.dimentions,
+              });
+            }}
+          />
+          <div className="flex justify-center items-center border border-black h-10 w-36 ml-2 mr-2 bg-mob-blue-dark text-white rounded">
+            {`${state.dimentions} Dimentions`}
+          </div>
+          <BsFillArrowRightSquareFill
+            className="text-mob-blue-dark hover:text-mob-blue-light"
+            size={40}
+            onClick={() => {
+              setState({
+                ...state,
+                dimentions:
+                  state.dimentions < 100
+                    ? state.dimentions + 5
+                    : state.dimentions,
+              });
+            }}
+          />
+        </div>
+        <div className="flex mt-4">
+          <BsFillArrowLeftSquareFill
+            className="text-mob-blue-dark hover:text-mob-blue-light"
+            size={40}
+            onClick={() => {
+              setState({
+                ...state,
+                rooms:
+                  state.rooms > 5
+                    ? state.rooms - 5
+                    : state.rooms > 2
+                    ? 2
+                    : state.rooms,
+              });
+            }}
+          />
+          <div className="flex justify-center items-center border border-black h-10 w-36 ml-2 mr-2 bg-mob-blue-dark text-white rounded">
+            {`${state.rooms} Rooms`}
+          </div>
+          <BsFillArrowRightSquareFill
+            className="text-mob-blue-dark hover:text-mob-blue-light"
+            size={40}
+            onClick={() => {
+              setState({
+                ...state,
+                rooms:
+                  state.rooms === 2
+                    ? 5
+                    : state.rooms < 50
+                    ? state.rooms + 5
+                    : state.rooms,
+              });
+            }}
+          />
+        </div>
+      </div>
       <div className="flex">
         <div>
           {state.columns.map((y) => {
@@ -142,24 +235,6 @@ export function Dungeon() {
             );
           })}
         </div>
-        <button
-          className="border border-black h-10 w-40 mt-4 ml-4 bg-button-bg text-white hover:bg-button-hover"
-          onClick={() => {
-            const roads: boolean[][] = [];
-            for (let i = 0; i < DIMENTIONS; i++) {
-              roads.push([false]);
-              for (let j = 0; j < DIMENTIONS; j++) {
-                roads[i][j] = false;
-              }
-            }
-
-            createBoxes(roads);
-
-            setState({ ...state, roads: roads });
-          }}
-        >
-          Refresh
-        </button>
       </div>
     </div>
   );
