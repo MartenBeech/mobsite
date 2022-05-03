@@ -1,5 +1,4 @@
 import React from "react";
-import { preProcessFile } from "typescript";
 
 export enum Tile {
   Wall,
