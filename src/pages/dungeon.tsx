@@ -286,6 +286,7 @@ export function Dungeon() {
                       <DungeonTile
                         road={state.roads[y][x]}
                         showPath={state.showPath}
+                        dimentions={state.dimentions}
                       />
                     </div>
                   );
