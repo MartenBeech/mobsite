@@ -272,7 +272,7 @@ export function Dungeon() {
             setState({ ...state, showPath: !state.showPath });
           }}
         >
-          {`Show Path (${state.distance} tiles)`}
+          {`Show Path [${state.distance} tiles]`}
         </button>
       </div>
       <div className="flex">
