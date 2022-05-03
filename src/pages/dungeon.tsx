@@ -4,8 +4,7 @@ import {
   BsFillArrowLeftSquareFill,
   BsFillArrowRightSquareFill,
 } from "react-icons/bs";
-
-const BOX_MAX_SIZE = 3;
+import { AStarFinder } from "astar-typescript";
 
 export interface State {
   columns: number[];
@@ -13,7 +12,20 @@ export interface State {
   roads: Tile[][];
   dimentions: number;
   rooms: number;
+  pathZone: number[][];
+  showPath: boolean;
+  distance: number;
 }
+
+const BOX_MAX_SIZE = 0;
+let startPos = {
+  x: 0,
+  y: 0,
+};
+let endPos = {
+  x: 0,
+  y: 0,
+};
 
 export function Dungeon() {
   const [state, setState] = useState({
@@ -22,9 +34,11 @@ export function Dungeon() {
     roads: [],
     dimentions: 50,
     rooms: 25,
+    showPath: false,
+    distance: 0,
   } as State);
 
-  const newDungeon = () => {
+  const createNewDungeon = () => {
     const columns: Array<number> = [];
     const rows: Array<number> = [];
     for (let i = 0; i < state.dimentions; i++) {
@@ -33,23 +47,49 @@ export function Dungeon() {
     }
 
     const roads: Tile[][] = [];
+    const pathZone: number[][] = [];
     for (let i = 0; i < state.dimentions; i++) {
       roads.push([Tile.Wall]);
+      pathZone.push([1]);
       for (let j = 0; j < state.dimentions; j++) {
         roads[i][j] = Tile.Wall;
+        pathZone[i][j] = 1;
       }
     }
 
-    createRooms(roads);
+    createRooms({ roads: roads, pathZone: pathZone });
 
-    setState({ ...state, columns: columns, rows: rows, roads: roads });
+    const aStarInstance = new AStarFinder({
+      grid: { matrix: pathZone },
+      diagonalAllowed: false,
+      includeStartNode: false,
+    });
+    const myPathWay = aStarInstance.findPath(startPos, endPos);
+    myPathWay.map((pathTile) => {
+      roads[pathTile[1]][pathTile[0]] = Tile.AStarPath;
+    });
+    roads[startPos.y][startPos.x] = Tile.Start;
+    roads[endPos.y][endPos.x] = Tile.End;
+
+    setState({
+      ...state,
+      columns: columns,
+      rows: rows,
+      roads: roads,
+      distance: myPathWay.length,
+    });
   };
 
   useEffect(() => {
-    newDungeon();
+    createNewDungeon();
   }, [state.dimentions, state.rooms]);
 
-  const createRooms = (roads: Tile[][]) => {
+  interface createRoomsProps {
+    roads: Tile[][];
+    pathZone: number[][];
+  }
+
+  const createRooms = (props: createRoomsProps) => {
     let centerFrom = { x: 0, y: 0 };
     let centerTo = { x: 0, y: 0 };
 
@@ -68,14 +108,16 @@ export function Dungeon() {
 
       for (let x = rndCenterX - rndLeft; x <= rndCenterX + rndRight; x++) {
         for (let y = rndCenterY - rndUp; y <= rndCenterY + rndDown; y++) {
-          roads[y][x] = Tile.Road;
+          props.roads[y][x] = Tile.Road;
+          props.pathZone[y][x] = 0;
         }
       }
 
       centerTo = { y: rndCenterY, x: rndCenterX };
       if (centerFrom.x > 0) {
         linkBoxes({
-          roads: roads,
+          roads: props.roads,
+          pathZone: props.pathZone,
           centerFrom: { y: centerFrom.y, x: centerFrom.x },
           centerTo: { y: centerTo.y, x: centerTo.x },
         });
@@ -83,16 +125,17 @@ export function Dungeon() {
       centerFrom = { y: rndCenterY, x: rndCenterX };
 
       if (i === 0) {
-        roads[rndCenterY][rndCenterX] = Tile.Start;
+        startPos = { y: rndCenterY, x: rndCenterX };
       }
       if (i === state.rooms - 1) {
-        roads[rndCenterY][rndCenterX] = Tile.End;
+        endPos = { y: rndCenterY, x: rndCenterX };
       }
     }
   };
 
   interface linkBoxesProps {
     roads: Tile[][];
+    pathZone: number[][];
     centerFrom: { y: number; x: number };
     centerTo: { y: number; x: number };
   }
@@ -137,6 +180,7 @@ export function Dungeon() {
         ? (currentPos.y -= 1)
         : null;
       props.roads[currentPos.y][currentPos.x] = Tile.Road;
+      props.pathZone[currentPos.y][currentPos.x] = 0;
       directions.splice(rndNumber, 1);
     }
   };
@@ -147,7 +191,7 @@ export function Dungeon() {
         <button
           className="border border-black h-10 w-60 mt-4 bg-mob-blue-dark text-white hover:bg-mob-blue-light rounded"
           onClick={() => {
-            newDungeon();
+            createNewDungeon();
           }}
         >
           New Dungeon
@@ -218,6 +262,18 @@ export function Dungeon() {
             }}
           />
         </div>
+        <button
+          className={
+            state.showPath
+              ? "border border-black h-10 w-60 mt-4 bg-mob-blue-light text-white rounded"
+              : "border border-black h-10 w-60 mt-4 bg-mob-blue-dark text-white rounded"
+          }
+          onClick={() => {
+            setState({ ...state, showPath: !state.showPath });
+          }}
+        >
+          {`Show Path (${state.distance} tiles)`}
+        </button>
       </div>
       <div className="flex">
         <div>
@@ -227,7 +283,10 @@ export function Dungeon() {
                 {state.columns.map((x) => {
                   return (
                     <div key={`${x}-${y}`}>
-                      <DungeonTile road={state.roads[y][x]} />
+                      <DungeonTile
+                        road={state.roads[y][x]}
+                        showPath={state.showPath}
+                      />
                     </div>
                   );
                 })}
