@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "button-bg": "#2E279E",
-        "button-hover": "#4A3FFF",
+        "mob-blue-dark": "#2E279E",
+        "mob-blue-light": "#4A3FFF",
       },
     },
   },

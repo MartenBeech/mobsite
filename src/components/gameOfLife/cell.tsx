@@ -18,14 +18,14 @@ export const Cell = memo(function Cell(props: props) {
     <div>
       {props.alive ? (
         <div
-          className="w-5 h-5 border cursor-pointer hover:bg-gray-400 bg-black"
+          className="w-4 h-4 border cursor-pointer hover:bg-gray-400 bg-black"
           onClick={() => {
             props.handleClick();
           }}
         ></div>
       ) : (
         <div
-          className="w-5 h-5 border cursor-pointer hover:bg-gray-300 bg-gray-100"
+          className="w-4 h-4 border cursor-pointer hover:bg-gray-300 bg-gray-100"
           onClick={() => {
             props.handleClick();
           }}

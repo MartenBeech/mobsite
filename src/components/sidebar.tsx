@@ -125,8 +125,8 @@ const Button = (props: buttonProps) => {
         <button
           className={
             props.link != useLocation().pathname
-              ? "border border-black rounded h-10 w-full text-white bg-button-bg hover:bg-button-hover"
-              : "border border-black rounded h-10 w-full text-white bg-button-bg cursor-default opacity-50"
+              ? "border border-black rounded h-10 w-full text-white bg-mob-blue-dark hover:bg-mob-blue-light"
+              : "border border-black rounded h-10 w-full text-white bg-mob-blue-dark cursor-default opacity-50"
           }
           onClick={() => {
             props.setState({ currentLink: props.link });

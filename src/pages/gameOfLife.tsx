@@ -89,11 +89,11 @@ export const GameOfLife = () => {
   };
 
   return (
-    <div className="flex-row mt-4">
+    <div className="flex mt-4">
       <div className="mr-4">
         {state.columns.map((column: number) => {
           return (
-            <div key={column} className="flex-row">
+            <div key={column} className="flex">
               {state.rows.map((row: number) => {
                 return (
                   <Cell
