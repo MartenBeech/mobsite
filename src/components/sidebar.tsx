@@ -7,6 +7,7 @@ import { IngredientTable } from "../pages/ingredientTable";
 import { RandomUsers } from "../pages/randomUsers";
 import { GameOfLife } from "../pages/gameOfLife";
 import { Dungeon } from "../pages/dungeon";
+import { Mastermind } from "../pages/mastermind";
 import {
   BrowserRouter as Router,
   Routes,
@@ -86,6 +87,12 @@ export const Sidebar = (props: sidebarProps) => {
                   text="Dungeon"
                   link={"/dungeon"}
                 />
+                <Button
+                  state={state}
+                  setState={setState}
+                  text="Mastermind"
+                  link={"/mastermind"}
+                />
               </div>
             </div>
           </div>
@@ -99,6 +106,7 @@ export const Sidebar = (props: sidebarProps) => {
           <Route path="/game-of-life" element={<GameOfLife />}></Route>
           <Route path="/random-user-table" element={<RandomUsers />}></Route>
           <Route path="/dungeon" element={<Dungeon />}></Route>
+          <Route path="/mastermind" element={<Mastermind />}></Route>
         </Routes>
       </Router>
     </div>

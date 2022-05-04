@@ -277,7 +277,7 @@ export function Dungeon() {
       </div>
       <div className="flex">
         <div>
-          {state.columns.map((y) => {
+          {state.rows.map((y) => {
             return (
               <div className="flex" key={y}>
                 {state.columns.map((x) => {
