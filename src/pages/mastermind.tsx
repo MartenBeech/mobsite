@@ -12,6 +12,7 @@ export interface State {
   keyCode: Array<number>;
   totalGuesses: number;
   clues: Array<Array<number>>;
+  showCode: boolean;
 }
 
 export function Mastermind() {
@@ -25,6 +26,7 @@ export function Mastermind() {
     keyCode: [],
     totalGuesses: 0,
     clues: [],
+    showCode: false,
   } as State);
 
   const newData = () => {
@@ -65,6 +67,11 @@ export function Mastermind() {
   }, [state.columns]);
 
   const putInCode = () => {
+    for (let i = 0; i < state.codeInput.length; i++) {
+      if (state.codeInput[i] === -1) {
+        return;
+      }
+    }
     const guessedInput = [...state.guessedInputs];
     for (let i = 0; i < state.columns; i++) {
       guessedInput[state.totalGuesses][i] = state.codeInput[i];
@@ -131,6 +138,25 @@ export function Mastermind() {
             </div>
           );
         })}
+      </div>
+      <div className="flex">
+        {state.columnsArray.map((x, index) => {
+          return (
+            <div className="flex" key={x}>
+              <div className="flex justify-center items-center mt-2 mr-4 text-5xl w-16 h-16 border border-black">
+                {state.showCode ? state.keyCode[index] : "?"}
+              </div>
+            </div>
+          );
+        })}
+        <button
+          className="mt-2 mr-4 px-4 text-xl w-32 h-16 border border-black bg-mob-blue-dark text-white hover:bg-mob-blue-light"
+          onClick={() => {
+            setState({ ...state, showCode: !state.showCode });
+          }}
+        >
+          Show code
+        </button>
       </div>
       <div className="flex mt-16">
         {state.columnsArray.map((i) => {
