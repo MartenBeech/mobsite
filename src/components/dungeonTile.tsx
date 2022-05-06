@@ -32,7 +32,7 @@ export function DungeonTile(props: props) {
         ) : road === Tile.End ? (
           <div className={`w-3 h-3 border border-black bg-red-500`}></div>
         ) : road === Tile.AStarPath ? (
-          <div className={`w-3 h-3 border border-black bg-blue-200`}></div>
+          <div className={`w-3 h-3 border border-black bg-blue-300`}></div>
         ) : null
       ) : props.dimentions > 50 ? (
         road === Tile.Road ? (
@@ -44,7 +44,7 @@ export function DungeonTile(props: props) {
         ) : road === Tile.End ? (
           <div className={`w-4 h-4 border border-black bg-red-500`}></div>
         ) : road === Tile.AStarPath ? (
-          <div className={`w-4 h-4 border border-black bg-blue-200`}></div>
+          <div className={`w-4 h-4 border border-black bg-blue-300`}></div>
         ) : null
       ) : props.dimentions > 25 ? (
         road === Tile.Road ? (
@@ -56,7 +56,7 @@ export function DungeonTile(props: props) {
         ) : road === Tile.End ? (
           <div className={`w-6 h-6 border border-black bg-red-500`}></div>
         ) : road === Tile.AStarPath ? (
-          <div className={`w-6 h-6 border border-black bg-blue-200`}></div>
+          <div className={`w-6 h-6 border border-black bg-blue-300`}></div>
         ) : null
       ) : props.dimentions >= 10 ? (
         road === Tile.Road ? (
@@ -68,7 +68,7 @@ export function DungeonTile(props: props) {
         ) : road === Tile.End ? (
           <div className={`w-12 h-12 border border-black bg-red-500`}></div>
         ) : road === Tile.AStarPath ? (
-          <div className={`w-12 h-12 border border-black bg-blue-200`}></div>
+          <div className={`w-12 h-12 border border-black bg-blue-300`}></div>
         ) : null
       ) : null}
     </div>

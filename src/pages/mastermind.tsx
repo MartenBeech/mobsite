@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MastermindTile } from "../components/mastermind/mastermindTile";
+import { CalculateGuess } from "../components/mastermind/mastermindCalculator";
 
 export interface State {
   columns: number;
@@ -10,11 +11,12 @@ export interface State {
   guessedInputs: Array<Array<number>>;
   keyCode: Array<number>;
   totalGuesses: number;
+  clues: Array<Array<number>>;
 }
 
 export function Mastermind() {
   const [state, setState] = useState({
-    columns: 5,
+    columns: 4,
     rows: 10,
     columnsArray: [],
     rowsArray: [],
@@ -22,6 +24,7 @@ export function Mastermind() {
     guessedInputs: [],
     keyCode: [],
     totalGuesses: 0,
+    clues: [],
   } as State);
 
   const newData = () => {
@@ -31,7 +34,7 @@ export function Mastermind() {
     for (let i = 0; i < state.columns; i++) {
       columnsArray.push(i);
       codeInput.push(-1);
-      keyCode.push(Math.floor(Math.random() * 10));
+      keyCode.push(Math.floor(Math.random() * 8));
     }
 
     const rowsArray: Array<number> = [];
@@ -53,6 +56,7 @@ export function Mastermind() {
       rowsArray: rowsArray,
       codeInput: codeInput,
       keyCode: keyCode,
+      guessedInputs: guessedInputs,
     });
   };
 
@@ -65,26 +69,65 @@ export function Mastermind() {
     for (let i = 0; i < state.columns; i++) {
       guessedInput[state.totalGuesses][i] = state.codeInput[i];
     }
+    const clues = [...state.clues];
+    clues.push(
+      CalculateGuess({ guess: state.codeInput, keyCode: state.keyCode })
+    );
+
     setState({
       ...state,
       guessedInputs: guessedInput,
       totalGuesses: state.totalGuesses + 1,
+      clues: clues,
+      codeInput: [-1, -1, -1, -1, -1],
     });
   };
 
   return (
     <div className="flex flex-col">
       <div>
-        {state.rowsArray.map((y) => {
+        {state.rowsArray.map((y, index) => {
           return (
-            <div className="flex" key={y}>
+            <div className="flex items-center" key={y}>
               {state.columnsArray.map((x) => {
                 return (
                   <div key={`${x}-${y}`}>
-                    <MastermindTile number={0} />
+                    <MastermindTile number={state.guessedInputs[y][x]} />
                   </div>
                 );
               })}
+
+              {state.clues[index] && (
+                <div className="flex">
+                  {state.clues[index].map((clue, index) => {
+                    const clueArray: Array<number> = [];
+                    for (let i = 0; i < clue; i++) {
+                      clueArray.push(i);
+                    }
+                    return (
+                      <div className="flex" key={index}>
+                        {clueArray.map((clue) => {
+                          return (
+                            <div key={clue}>
+                              {index === 0 ? (
+                                <div
+                                  className="border border-black w-5 h-5 m-1 bg-green-500"
+                                  key={clue}
+                                ></div>
+                              ) : (
+                                <div
+                                  className="border border-black w-5 h-5 m-1 bg-yellow-500"
+                                  key={clue}
+                                ></div>
+                              )}
+                            </div>
+                          );
+                        })}{" "}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           );
         })}
@@ -96,7 +139,7 @@ export function Mastermind() {
               <input
                 className="mt-2 mr-4 px-4 text-5xl w-16 h-16 border border-black"
                 value={
-                  state.codeInput[i] >= 0 && state.codeInput[i] < 10
+                  state.codeInput[i] >= 0 && state.codeInput[i] < 8
                     ? state.codeInput[i]
                     : ""
                 }

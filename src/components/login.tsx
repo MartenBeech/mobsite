@@ -7,8 +7,8 @@ interface loginProps {
 }
 
 export function Login(props: loginProps) {
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("Mr. User");
+  const [password, setPassword] = useState("thisisapassword");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +32,7 @@ export function Login(props: loginProps) {
               <input
                 className="border w-1/2 rounded-lg"
                 type="text"
+                value={username}
                 onChange={(e) => setUserName(e.target.value)}
               />
             </div>
@@ -42,6 +43,7 @@ export function Login(props: loginProps) {
               <input
                 className="border w-1/2 rounded-lg"
                 type="password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
