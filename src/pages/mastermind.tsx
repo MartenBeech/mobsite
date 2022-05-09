@@ -199,12 +199,12 @@ export function Mastermind() {
         </button>
       </div>
       <div className="mt-4">
-        <div>{`Type in a ${state.columns} digit code here of numbers 0-${
+        <p>{`Type in a ${state.columns} digit code here of numbers 0-${
           state.columns * 2 - 1
-        }.`}</div>
-        <div>{`After pressing Guess, hints will show up about the actual code.`}</div>
-        <div>{`Green hint: You have a correct number on a correct space.`}</div>
-        <div>{`Yellow hint: You have a correct number on a wrong space.`}</div>
+        }.`}</p>
+        <p>{`After pressing Guess, hints will show up about the actual code.`}</p>
+        <p>{`Green hint: You have a correct number on a correct space.`}</p>
+        <p>{`Yellow hint: You have a correct number on a wrong space.`}</p>
       </div>
     </div>
   );
