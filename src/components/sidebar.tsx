@@ -45,7 +45,7 @@ export const Sidebar = (props: sidebarProps) => {
                   text="Home"
                   link={"/"}
                 />
-                <Button
+                {/* <Button
                   state={state}
                   setState={setState}
                   text="Incrementer"
@@ -62,7 +62,7 @@ export const Sidebar = (props: sidebarProps) => {
                   setState={setState}
                   text="Ingredient Table"
                   link={"/ingredient-table"}
-                />
+                /> */}
                 <Button
                   state={state}
                   setState={setState}

@@ -17,7 +17,7 @@ export interface State {
   distance: number;
 }
 
-const BOX_MAX_SIZE = 0;
+const BOX_MAX_SIZE = 5;
 let startPos = {
   x: 0,
   y: 0,
