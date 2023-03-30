@@ -28,6 +28,7 @@ export function Mastermind() {
     clues: [],
     showCode: false,
   } as State);
+  const [possibleAnswers, setPossibleAnswers] = useState(0);
 
   const newData = () => {
     const columnsArray: Array<number> = [];
@@ -60,6 +61,8 @@ export function Mastermind() {
       keyCode: keyCode,
       guessedInputs: guessedInputs,
     });
+
+    setPossibleAnswers(Math.pow(10, state.columns));
   };
 
   useEffect(() => {
@@ -67,14 +70,13 @@ export function Mastermind() {
   }, [state.columns]);
 
   const putInCode = () => {
-    for (let i = 0; i < state.codeInput.length; i++) {
-      if (state.codeInput[i] === -1) {
-        return;
-      }
+    if (state.codeInput.includes(-1)) {
+      return;
     }
-    const guessedInput = [...state.guessedInputs];
+
+    const guessedInputs = [...state.guessedInputs];
     for (let i = 0; i < state.columns; i++) {
-      guessedInput[state.totalGuesses][i] = state.codeInput[i];
+      guessedInputs[state.totalGuesses][i] = state.codeInput[i];
     }
     const clues = [...state.clues];
     clues.push(
@@ -85,13 +87,41 @@ export function Mastermind() {
       codeInput.push(-1);
     }
 
+    const totalGuesses = state.totalGuesses + 1;
+
     setState({
       ...state,
-      guessedInputs: guessedInput,
-      totalGuesses: state.totalGuesses + 1,
+      guessedInputs: guessedInputs,
+      totalGuesses: totalGuesses,
       clues: clues,
       codeInput: codeInput,
     });
+
+    const combinations = Math.pow(10, state.columns);
+    let possibleAnswersCopy = 0;
+    for (let i = 0; i < combinations; i++) {
+      let isFitting = true;
+      for (let row = 0; row < totalGuesses; row++) {
+        const paddedNumber = i.toString().padStart(state.columns, "0");
+        const guessString = paddedNumber.split("");
+        const guessNumber: number[] = [];
+        guessString.map((char) => {
+          guessNumber.push(parseInt(char));
+        });
+        const result = CalculateGuess({
+          guess: guessNumber,
+          keyCode: guessedInputs[row],
+        });
+        if (result[0] != clues[row][0] || result[1] != clues[row][1]) {
+          isFitting = false;
+        }
+      }
+      if (isFitting) {
+        possibleAnswersCopy++;
+      }
+    }
+
+    setPossibleAnswers(possibleAnswersCopy);
   };
 
   return (
@@ -159,7 +189,7 @@ export function Mastermind() {
             setState({ ...state, showCode: !state.showCode });
           }}
         >
-          Show code
+          Show Code
         </button>
       </div>
       <div className="flex mt-16">
@@ -197,6 +227,9 @@ export function Mastermind() {
         >
           Guess
         </button>
+        <div className="flex items-center h-16 mt-2 mr-4 px-4 text-xl ">
+          {`(${possibleAnswers} possible answers)`}
+        </div>
       </div>
       <div className="mt-4">
         <p>{`Type in a ${state.columns} digit code here of numbers 0-${
