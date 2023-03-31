@@ -60,6 +60,8 @@ export function Mastermind() {
       codeInput: codeInput,
       keyCode: keyCode,
       guessedInputs: guessedInputs,
+      clues: [],
+      totalGuesses: 0,
     });
 
     setPossibleAnswers(Math.pow(10, state.columns));
@@ -227,7 +229,7 @@ export function Mastermind() {
         >
           Guess
         </button>
-        <div className="flex items-center h-16 mt-2 mr-4 px-4 text-xl ">
+        <div className="flex items-center h-16 mt-2 mr-4 px-4 text-xl">
           {`(${possibleAnswers} possible answers)`}
         </div>
       </div>
@@ -238,6 +240,53 @@ export function Mastermind() {
         <p>{`After pressing Guess, hints will show up about the actual code.`}</p>
         <p>{`Green hint: You have a correct number on a correct space.`}</p>
         <p>{`Yellow hint: You have a correct number on a wrong space.`}</p>
+        <div className="flex items-center mt-4">
+          <button
+            className="mt-2 mr-8 px-4 text-xl w-32 h-16 border border-black bg-mob-blue-dark text-white hover:bg-mob-blue-light rounded-xl"
+            onClick={() => {
+              newData();
+            }}
+          >
+            New Game
+          </button>
+          <p>Columns:</p>
+          <button
+            className={`mt-2 ml-4 mr-4 px-4 text-xl w-16 h-16 border border-black bg-mob-blue-dark text-white rounded-xl ${
+              state.columns === 3
+                ? "opacity-50 cursor-default"
+                : "hover:bg-mob-blue-light"
+            }`}
+            onClick={() => {
+              setState({ ...state, columns: 3 });
+            }}
+          >
+            3
+          </button>
+          <button
+            className={`mt-2 ml-4 mr-4 px-4 text-xl w-16 h-16 border border-black bg-mob-blue-dark text-white  rounded-xl ${
+              state.columns === 4
+                ? "opacity-50 cursor-default"
+                : "hover:bg-mob-blue-light"
+            }`}
+            onClick={() => {
+              setState({ ...state, columns: 4 });
+            }}
+          >
+            4
+          </button>
+          <button
+            className={`mt-2 ml-4 mr-4 px-4 text-xl w-16 h-16 border border-black bg-mob-blue-dark text-white rounded-xl ${
+              state.columns === 5
+                ? "opacity-50 cursor-default"
+                : "hover:bg-mob-blue-light"
+            }`}
+            onClick={() => {
+              setState({ ...state, columns: 5 });
+            }}
+          >
+            5
+          </button>
+        </div>
       </div>
     </div>
   );
