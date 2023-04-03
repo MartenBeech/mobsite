@@ -222,7 +222,11 @@ export function Mastermind() {
           );
         })}
         <button
-          className="mt-2 mr-4 px-4 text-xl w-32 h-16 border border-black bg-mob-blue-dark text-white hover:bg-mob-blue-light rounded-xl"
+          className={`mt-2 mr-4 px-4 text-xl w-32 h-16 border border-black bg-mob-blue-dark text-white  rounded-xl ${
+            state.codeInput.includes(-1)
+              ? "opacity-50 cursor-default"
+              : "hover:bg-mob-blue-light"
+          }`}
           onClick={() => {
             putInCode();
           }}
